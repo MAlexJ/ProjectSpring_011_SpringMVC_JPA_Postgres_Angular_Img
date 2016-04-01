@@ -1,10 +1,8 @@
 package com.malex.model.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Lob;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Arrays;
+import java.util.List;
 
 @Entity
 @Table(name = "article")
@@ -17,10 +15,21 @@ public class ArticleEntity extends BaseEntity {
     private String desctiption;
 
     @Lob
-    @Column(name = "data")
-    private byte[] data;
+    @Column(name = "img")
+    private byte[] img;
+
+    @OneToMany(mappedBy = "articleEntity", fetch = FetchType.EAGER)
+    private List<ArticleBlockEntity> blockEntityList;
 
     public ArticleEntity() {
+    }
+
+    public List<ArticleBlockEntity> getBlockEntityList() {
+        return blockEntityList;
+    }
+
+    public void setBlockEntityList(List<ArticleBlockEntity> blockEntityList) {
+        this.blockEntityList = blockEntityList;
     }
 
     public String getTitle() {
@@ -39,12 +48,12 @@ public class ArticleEntity extends BaseEntity {
         this.desctiption = desctiption;
     }
 
-    public byte[] getData() {
-        return data;
+    public byte[] getImg() {
+        return img;
     }
 
-    public void setData(byte[] data) {
-        this.data = data;
+    public void setImg(byte[] img) {
+        this.img = img;
     }
 
     @Override
@@ -57,15 +66,29 @@ public class ArticleEntity extends BaseEntity {
 
         if (title != null ? !title.equals(that.title) : that.title != null) return false;
         if (desctiption != null ? !desctiption.equals(that.desctiption) : that.desctiption != null) return false;
-        return Arrays.equals(data, that.data);
+        if (!Arrays.equals(img, that.img)) return false;
+        if (blockEntityList != null ? !blockEntityList.equals(that.blockEntityList) : that.blockEntityList != null)
+            return false;
 
+        return true;
     }
 
     @Override
     public int hashCode() {
         int result = title != null ? title.hashCode() : 0;
         result = 31 * result + (desctiption != null ? desctiption.hashCode() : 0);
-        result = 31 * result + Arrays.hashCode(data);
+        result = 31 * result + Arrays.hashCode(img);
+        result = 31 * result + (blockEntityList != null ? blockEntityList.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "ArticleEntity{" +
+                "title='" + title + '\'' +
+                ", desctiption='" + desctiption + '\'' +
+                ", img=" + Arrays.toString(img) +
+                ", blockEntityList=" + blockEntityList +
+                '}';
     }
 }

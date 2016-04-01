@@ -1,9 +1,6 @@
 package com.malex.model.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Lob;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Arrays;
 
 @Entity
@@ -13,19 +10,42 @@ public class ArticleBlockEntity extends BaseEntity {
     @Column(name = "text")
     private String text;
 
+    @Column(name = "index")
+    private int index;
+
     @Lob
-    @Column(name = "data")
-    private byte[] data;
+    @Column(name = "img")
+    private byte[] img;
+
+    @ManyToOne
+    @JoinColumn(name = "article_id", nullable = false)
+    private ArticleEntity articleEntity;
 
     public ArticleBlockEntity() {
     }
 
-    public byte[] getData() {
-        return data;
+    public ArticleEntity getArticleEntity() {
+        return articleEntity;
     }
 
-    public void setData(byte[] data) {
-        this.data = data;
+    public void setArticleEntity(ArticleEntity articleEntity) {
+        this.articleEntity = articleEntity;
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
+    public byte[] getImg() {
+        return img;
+    }
+
+    public void setImg(byte[] img) {
+        this.img = img;
     }
 
     public String getText() {
@@ -43,15 +63,19 @@ public class ArticleBlockEntity extends BaseEntity {
 
         ArticleBlockEntity that = (ArticleBlockEntity) o;
 
+        if (index != that.index) return false;
         if (text != null ? !text.equals(that.text) : that.text != null) return false;
-        return Arrays.equals(data, that.data);
+        if (!Arrays.equals(img, that.img)) return false;
+        return articleEntity != null ? articleEntity.equals(that.articleEntity) : that.articleEntity == null;
 
     }
 
     @Override
     public int hashCode() {
         int result = text != null ? text.hashCode() : 0;
-        result = 31 * result + Arrays.hashCode(data);
+        result = 31 * result + index;
+        result = 31 * result + Arrays.hashCode(img);
+        result = 31 * result + (articleEntity != null ? articleEntity.hashCode() : 0);
         return result;
     }
 }
