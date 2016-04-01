@@ -1,14 +1,11 @@
 package com.malex.controller;
 
-
-import com.malex.model.entity.ArticleEntity;
-import com.malex.repository.ArticleRepository;
+import com.malex.model.dto.ImagesDTO;
+import com.malex.service.ImagesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import java.util.List;
 
@@ -16,16 +13,25 @@ import java.util.List;
 public class MyRestController {
 
     @Autowired
-    private ArticleRepository articleRepository;
+    private ImagesService imagesService;
 
-    // GET /article/ (Index) – получает список всех объектов.
-    @RequestMapping(path = "/article",
-            method = RequestMethod.GET,
+    @RequestMapping(path = "/images", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public List<ArticleEntity> listGoodsEntity() {
-        System.err.println(this.articleRepository.findAll());
-        return this.articleRepository.findAll();
+    public List<ImagesDTO> get() {
+        return this.imagesService.findAllDTO();
     }
+
+    @RequestMapping(path = "/images", method = RequestMethod.POST)
+    public void post(@RequestParam("file") CommonsMultipartFile file) {
+        if (!file.isEmpty()) {
+            System.err.println(file.getOriginalFilename());
+            ImagesDTO entity = new ImagesDTO();
+            entity.setName(file.getOriginalFilename());
+            entity.setImg(file.getBytes());
+            imagesService.saveDTO(entity);
+        }
+    }
+
 
 }

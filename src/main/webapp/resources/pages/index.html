@@ -13,6 +13,15 @@
     <!-- AngularJS: Controller -->
     <script type="text/javascript" th:src="@{/resources/js/controller/controller.js}"
             src="../js/controller/controller.js"></script>
+    <!-- AngularJS: Service -->
+    <script type="text/javascript" th:src="@{/resources/js/service/service.js}"
+            src="../js/service/service.js"></script>
+    <!-- AngularJS: Directive -->
+    <script type="text/javascript" th:src="@{/resources/js/directive/directive.js}"
+            src="../js/directive/directive.js"></script>
+    <!-- AngularJS: oi.file -->
+    <script type="text/javascript" th:src="@{/resources/js/lib/oi.file.js}"
+            src="../js/lib/oi.file.js"></script>
 
     <!-- materialize: CSS -->
     <link rel="stylesheet" th:href="@{/resources/css/materialize.min.css}" href="../css/materialize.min.css"/>
@@ -28,22 +37,19 @@
 </head>
 <body ng-app="myApp">
 
-<main>
+<main >
     <div class="container">
-        <div class="section" ng-controller="articleController">
-            <div class="row">
+        <div class="section">
+            <div class="row" ng-controller="articleController">
 
-                <div class="col s12 m12 l3" ng-repeat="article in articles">
+                <div class="col s12 m12 l3" ng-repeat="image in images">
                     <div class="card hoverable">
                         <div class="card-image">
-                            <div ng-if="article.img">
-                                <a href="#"><img src="{{article.img}}"/></a>
-                            </div>
-                            <span class="card-title">{{article.id}} {{article.title}}</span>
-
+                            <a href="#"><img src="data:image/png;base64,{{image.img}}"/></a>
+                            <span class="card-title">{{image.id}} {{image.name}}</span>
                         </div>
                         <div class="card-content">
-                            <p>{{article.desctiption}}</p>
+                            <p>{{image.name}}</p>
                         </div>
                     </div>
                 </div>
@@ -53,49 +59,34 @@
     </div>
 
     <div class="container">
-        <div class="row">
-            <div class="card col s6">
-                <form method="POST" action="/upload" enctype="multipart/form-data">
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <input placeholder="Name" required="" type="text" name="name"
-                                   class="validate" />
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <input placeholder="Title" required="" type="text" name="title"
-                                   class="validate" />
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s12">
-
-                            <div class="file-field input-field">
-                                <div class="btn">
-                                    <span>File</span>
-                                    <input type="file" method="POST" accept=".jpg" name="file"/>
-                                </div>
-                                <div class="file-path-wrapper">
-                                    <input class="file-path validate" type="text"
-                                           placeholder="Upload one  files" />
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="row">
-
-                        <div class="input-field col s3">
-                            <button type="submit" class="waves-effect waves-light btn">Enter</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
+        <div ng-controller="myCtrl">
+            <input type="file" file-model="myFile"/>
+            <button ng-click="uploadFile()">upload me</button>
         </div>
-
     </div>
-</main>
 
+    <div class="container"  ng-controller="articleController">
+        <p></p>
+        <p></p>
+        <!-- Загрузка через проводник и перетаскиванием -->
+        <input type="file" oi-file="options" />
+    </div>
+
+    <div class="container">
+
+        <ul class="upload-area" oi-file="uploadoptions" ui-sortable="{stop: sort}" ng-class="dropClass" ng-model="items">
+            <li class="file-item" ng-repeat="item in items">
+                <button type="button" class="close" ng-click="del($index, abort())">&times;</button>
+                <a href="{{getUrl(item, 'image')}}" ><img class="file-item-img" ng-src="{{getUrl(item, 'thumb')}}" /></a>
+                <div ng-show="item.uploading">
+                    <div class="progress">
+                        <div class="bar" ng-style="{'width': item.progress+'%'}"></div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+</main>
 </body>
 </html>

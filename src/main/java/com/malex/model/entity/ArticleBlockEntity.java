@@ -1,5 +1,7 @@
 package com.malex.model.entity;
 
+import com.malex.model.entity.templ.BaseEntity;
+
 import javax.persistence.*;
 import java.util.Arrays;
 
@@ -12,10 +14,6 @@ public class ArticleBlockEntity extends BaseEntity {
 
     @Column(name = "index")
     private int index;
-
-    @Lob
-    @Column(name = "img")
-    private byte[] img;
 
     @ManyToOne
     @JoinColumn(name = "article_id", nullable = false)
@@ -40,14 +38,6 @@ public class ArticleBlockEntity extends BaseEntity {
         this.index = index;
     }
 
-    public byte[] getImg() {
-        return img;
-    }
-
-    public void setImg(byte[] img) {
-        this.img = img;
-    }
-
     public String getText() {
         return text;
     }
@@ -65,7 +55,6 @@ public class ArticleBlockEntity extends BaseEntity {
 
         if (index != that.index) return false;
         if (text != null ? !text.equals(that.text) : that.text != null) return false;
-        if (!Arrays.equals(img, that.img)) return false;
         return articleEntity != null ? articleEntity.equals(that.articleEntity) : that.articleEntity == null;
 
     }
@@ -74,7 +63,6 @@ public class ArticleBlockEntity extends BaseEntity {
     public int hashCode() {
         int result = text != null ? text.hashCode() : 0;
         result = 31 * result + index;
-        result = 31 * result + Arrays.hashCode(img);
         result = 31 * result + (articleEntity != null ? articleEntity.hashCode() : 0);
         return result;
     }

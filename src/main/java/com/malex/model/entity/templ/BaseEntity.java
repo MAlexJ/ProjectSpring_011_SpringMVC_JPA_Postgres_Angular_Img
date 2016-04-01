@@ -1,4 +1,4 @@
-package com.malex.model.entity;
+package com.malex.model.entity.templ;
 
 import javax.persistence.*;
 import java.io.Serializable;
