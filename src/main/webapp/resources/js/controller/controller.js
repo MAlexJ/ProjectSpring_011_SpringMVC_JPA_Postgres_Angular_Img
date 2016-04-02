@@ -10,7 +10,7 @@ myApp.controller('articleController', function () {
 
 });
 
-myApp.controller('adminArticleController', function ($scope, $http, fileUpload) {
+myApp.controller('adminImageController', function ($scope, $http, fileUpload) {
 
     // GET: list -> request get  
     $http.get('/images').success(function (data) {
@@ -34,5 +34,20 @@ myApp.controller('adminArticleController', function ($scope, $http, fileUpload) 
         var uploadUrl = "/images";
         fileUpload.uploadFileToUrl(file, uploadUrl);
     };
+
+});
+
+myApp.controller('adminArticleController', function ($scope, $http) {
+
+    $scope.save = function (article, articleForm) {
+        if (articleForm.$valid) {
+            $http.post('/article', article).success(function () {
+                {
+                    $scope.article.title = "";
+                    $scope.article.desctiption = "";
+                }
+            });
+        }
+    }
 
 });

@@ -1,6 +1,8 @@
 package com.malex.controller;
 
 import com.malex.model.dto.ImagesDTO;
+import com.malex.model.entity.ArticleEntity;
+import com.malex.service.ArticleService;
 import com.malex.service.ImagesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,16 +19,20 @@ public class MyRestController {
     @Autowired
     private ImagesService imagesService;
 
+    @Autowired
+    private ArticleService articleService;
+
+    // Images
     @RequestMapping(path = "/images", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public List<ImagesDTO> get() {
+    public List<ImagesDTO> imageGET() {
         return this.imagesService.findAllDTO();
     }
 
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(path = "/images", method = RequestMethod.POST)
-    public void post(@RequestParam("file") CommonsMultipartFile file) {
+    public void imagePOST(@RequestParam("file") CommonsMultipartFile file) {
         if (!file.isEmpty()) {
             System.err.println(file.getOriginalFilename());
             ImagesDTO entity = new ImagesDTO();
@@ -34,6 +40,14 @@ public class MyRestController {
             entity.setImg(file.getBytes());
             imagesService.saveDTO(entity);
         }
+    }
+
+    //Article
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(path = "/article", method = RequestMethod.POST)
+    public void articlePOST(@RequestBody ArticleEntity entity) {
+        System.err.println(entity.getTitle());
+        System.err.println(entity.getDesctiption());
     }
 
 

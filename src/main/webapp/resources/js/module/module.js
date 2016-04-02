@@ -15,6 +15,13 @@ var myApp = angular.module('myApp', ["ngRoute"]).config(function ($routeProvider
             controller: 'articleController'
         });
 
+    $routeProvider.when('/adminImage',
+        {
+            templateUrl: 'adminImage.html',
+            controller: 'adminImageController'
+        });
+
+
     $routeProvider.when('/adminArticle',
         {
             templateUrl: 'adminArticle.html',

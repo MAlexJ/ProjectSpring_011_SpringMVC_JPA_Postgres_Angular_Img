@@ -19,12 +19,17 @@ public class HomeController {
     }
 
     @RequestMapping(path = "/article", method = RequestMethod.GET)
-    public String getCrud() {
+    public String getArticle() {
         return "views/article";
     }
 
+    @RequestMapping(path = "/adminImage", method = RequestMethod.GET)
+    public String getAdminImage() {
+        return "views/adminImage";
+    }
+
     @RequestMapping(path = "/adminArticle", method = RequestMethod.GET)
-    public String getLogin() {
+    public String getAdminArticle() {
         return "views/adminArticle";
     }
 
