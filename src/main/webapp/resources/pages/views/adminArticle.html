@@ -1,0 +1,39 @@
+<div ng-controller="adminArticleController">
+    <div class="container">
+        <div class="section">
+            <div class="row">
+
+                <div class="col s12 m12 l3" ng-repeat="image in images">
+                    <div class="card hoverable">
+                        <div class="card-image">
+                            <a href="#"></a>
+                            <img alt="{{image.name}}" data-ng-src="{{'data:image/png;base64,'+image.img}}"
+                                 class="photo"/>
+                            <span class="card-title">{{image.id}} {{image.name}}</span>
+                        </div>
+                        <div class="card-content">
+                            <p>{{image.name}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <p></p>
+        <p><b>myCtrl</b></p>
+        <p></p>
+        <div>
+            <input type="file" file-model="myFile"/>
+            <button ng-click="uploadFile()">upload me</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <p></p>
+        <p></p>
+        <button ng-click="viewImage()">Show</button>
+    </div>
+
+</div>

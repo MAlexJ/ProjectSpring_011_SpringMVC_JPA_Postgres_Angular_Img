@@ -1,6 +1,16 @@
 'use strict';
 
-myApp.controller('articleController', function ($scope, $http, fileUpload) {
+
+myApp.controller('homeController', function () {
+
+});
+
+
+myApp.controller('articleController', function () {
+
+});
+
+myApp.controller('adminArticleController', function ($scope, $http, fileUpload) {
 
     // GET: list -> request get  
     $http.get('/images').success(function (data) {
@@ -26,7 +36,3 @@ myApp.controller('articleController', function ($scope, $http, fileUpload) {
     };
 
 });
-
-
-
-

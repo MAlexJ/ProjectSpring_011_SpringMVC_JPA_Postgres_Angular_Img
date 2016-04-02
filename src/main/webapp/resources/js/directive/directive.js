@@ -1,7 +1,5 @@
 'use strict';
 
-// Загрузка файлов в AngularJS https://jsfiddle.net/JeJenny/ZG9re/
-// https://habrahabr.ru/post/191464/
 myApp.directive('fileModel', ['$parse', function ($parse) {
     return {
         restrict: 'A',
