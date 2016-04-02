@@ -3,12 +3,14 @@ package com.malex.controller;
 import com.malex.model.dto.ImagesDTO;
 import com.malex.service.ImagesService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import java.util.List;
 
+// https://www.npmjs.com/package/ng-file-upload#server example upload Angular + Spring MVC
 @RestController
 public class MyRestController {
 
@@ -22,6 +24,7 @@ public class MyRestController {
         return this.imagesService.findAllDTO();
     }
 
+    @ResponseStatus(HttpStatus.OK)
     @RequestMapping(path = "/images", method = RequestMethod.POST)
     public void post(@RequestParam("file") CommonsMultipartFile file) {
         if (!file.isEmpty()) {

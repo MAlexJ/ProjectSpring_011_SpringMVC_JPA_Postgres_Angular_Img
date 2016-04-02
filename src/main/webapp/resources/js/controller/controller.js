@@ -1,33 +1,32 @@
 'use strict';
 
-myApp.controller('articleController', function ($scope, $http) {
+myApp.controller('articleController', function ($scope, $http, fileUpload) {
 
-    // GET: list
+    // GET: list -> request get  
     $http.get('/images').success(function (data) {
         $scope.images = data;
     }).error(function (data, status) {
         console.log("код ответа: " + status);
     });
 
-    $scope.file = {}; //Модель
-    $scope.options = {
-        //Вызывается для каждого выбранного файла
-        change: function (file) {
-            //В file содержится информация о файле
-            //Загружаем на сервер
-            file.$upload('/images', $scope.file)
-        }
+    // GET: list -> click to button
+    $scope.viewImage = function () {
+        $http.get('/images').success(function (data) {
+            $scope.images = data;
+        }).error(function (data, status) {
+            console.log("код ответа: " + status);
+        });
     };
-});
 
-myApp.controller('myCtrl', ['$scope', 'fileUpload', function ($scope, fileUpload) {
-
+    // POST: image -> click to button
     $scope.uploadFile = function () {
         var file = $scope.myFile;
         var uploadUrl = "/images";
         fileUpload.uploadFileToUrl(file, uploadUrl);
     };
 
-}]);
+});
+
+
 
 

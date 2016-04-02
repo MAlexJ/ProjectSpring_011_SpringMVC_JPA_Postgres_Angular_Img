@@ -19,9 +19,6 @@
     <!-- AngularJS: Directive -->
     <script type="text/javascript" th:src="@{/resources/js/directive/directive.js}"
             src="../js/directive/directive.js"></script>
-    <!-- AngularJS: oi.file -->
-    <script type="text/javascript" th:src="@{/resources/js/lib/oi.file.js}"
-            src="../js/lib/oi.file.js"></script>
 
     <!-- materialize: CSS -->
     <link rel="stylesheet" th:href="@{/resources/css/materialize.min.css}" href="../css/materialize.min.css"/>
@@ -35,17 +32,20 @@
     <!-- Style: CSS -->
     <link rel="stylesheet" th:href="@{/resources/css/style.css}" href="../css/style.css"/>
 </head>
+
 <body ng-app="myApp">
 
-<main >
+<main ng-controller="articleController">
     <div class="container">
         <div class="section">
-            <div class="row" ng-controller="articleController">
+            <div class="row">
 
                 <div class="col s12 m12 l3" ng-repeat="image in images">
                     <div class="card hoverable">
                         <div class="card-image">
-                            <a href="#"><img src="data:image/png;base64,{{image.img}}"/></a>
+                            <a href="#"></a>
+                            <!-- http://stackoverflow.com/questions/26905381/convert-image-to-base64-in-angularjs -->
+                            <img alt="{{image.name}}" data-ng-src="{{'data:image/png;base64,'+image.img}}" class="photo" />
                             <span class="card-title">{{image.id}} {{image.name}}</span>
                         </div>
                         <div class="card-content">
@@ -53,38 +53,24 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
 
     <div class="container">
-        <div ng-controller="myCtrl">
+        <p></p>
+        <p><b>myCtrl</b></p>
+        <p></p>
+        <div>
             <input type="file" file-model="myFile"/>
             <button ng-click="uploadFile()">upload me</button>
         </div>
     </div>
 
-    <div class="container"  ng-controller="articleController">
+    <div class="container" >
         <p></p>
         <p></p>
-        <!-- Загрузка через проводник и перетаскиванием -->
-        <input type="file" oi-file="options" />
-    </div>
-
-    <div class="container">
-
-        <ul class="upload-area" oi-file="uploadoptions" ui-sortable="{stop: sort}" ng-class="dropClass" ng-model="items">
-            <li class="file-item" ng-repeat="item in items">
-                <button type="button" class="close" ng-click="del($index, abort())">&times;</button>
-                <a href="{{getUrl(item, 'image')}}" ><img class="file-item-img" ng-src="{{getUrl(item, 'thumb')}}" /></a>
-                <div ng-show="item.uploading">
-                    <div class="progress">
-                        <div class="bar" ng-style="{'width': item.progress+'%'}"></div>
-                    </div>
-                </div>
-            </li>
-        </ul>
+        <button ng-click="viewImage()">Show</button>
     </div>
 
 </main>
