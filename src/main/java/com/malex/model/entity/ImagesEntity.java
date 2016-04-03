@@ -1,23 +1,28 @@
 package com.malex.model.entity;
 
 import com.malex.model.entity.templ.BaseEntity;
+import com.malex.model.enums.ImageType;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Lob;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Arrays;
 
 @Entity
 @Table(name = "images")
 public class ImagesEntity extends BaseEntity {
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false, unique = true)
     private String name;
 
     @Lob
-    @Column(name = "img")
+    @Column(name = "img", nullable = false)
     private byte[] img;
+
+    @Column(name = "avalible", nullable = false)
+    private boolean isAvalible;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "type", nullable = false)
+    private ImageType type;
 
     public ImagesEntity() {
     }
@@ -38,12 +43,29 @@ public class ImagesEntity extends BaseEntity {
         this.img = img;
     }
 
+    public boolean isAvalible() {
+        return isAvalible;
+    }
+
+    public void setAvalible(boolean avalible) {
+        isAvalible = avalible;
+    }
+
+    public ImageType getType() {
+        return type;
+    }
+
+    public void setType(ImageType type) {
+        this.type = type;
+    }
+
     @Override
     public boolean equals(Object o) {
+
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ImagesEntity that = (ImagesEntity) o;
-        return name != null ? name.equals(that.name) : that.name == null && Arrays.equals(img, that.img);
+        ImagesEntity entity = (ImagesEntity) o;
+        return isAvalible == entity.isAvalible && (name != null ? name.equals(entity.name) : entity.name == null && Arrays.equals(img, entity.img) && type == entity.type);
 
     }
 
@@ -51,6 +73,8 @@ public class ImagesEntity extends BaseEntity {
     public int hashCode() {
         int result = name != null ? name.hashCode() : 0;
         result = 31 * result + Arrays.hashCode(img);
+        result = 31 * result + (isAvalible ? 1 : 0);
+        result = 31 * result + (type != null ? type.hashCode() : 0);
         return result;
     }
 }

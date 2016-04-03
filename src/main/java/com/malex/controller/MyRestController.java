@@ -33,13 +33,13 @@ public class MyRestController {
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(path = "/images", method = RequestMethod.POST)
     public void imagePOST(@RequestParam("file") CommonsMultipartFile file) {
-        if (!file.isEmpty()) {
-            System.err.println(file.getOriginalFilename());
-            ImagesDTO entity = new ImagesDTO();
-            entity.setName(file.getOriginalFilename());
-            entity.setImg(file.getBytes());
-            imagesService.saveDTO(entity);
-        }
+//        if (!file.isEmpty()) {
+//            System.err.println(file.getOriginalFilename());
+//            ImagesDTO entity = new ImagesDTO();
+//            entity.setName(file.getOriginalFilename());
+//            entity.setImg(file.getBytes());
+//            imagesService.saveDTO(entity);
+//        }
     }
 
     //Article
