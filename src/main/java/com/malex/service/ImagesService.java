@@ -21,5 +21,7 @@ public interface ImagesService {
 
     ImagesEntity findById(Long id);
 
+    ImagesEntity findByName(String name);
+
     List<ImagesEntity> findAll();
 }

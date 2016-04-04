@@ -118,7 +118,30 @@ public class ImagesServiceImplTest extends AbstractTransactionalJUnit4SpringCont
         assertNotNull(actualEntity);
         assertEquals(expectEntity.getId(), actualEntity.getId());
         assertEquals(expectEntity, actualEntity);
+    }
 
+    //  ImagesEntity findByName(String name);
+    @Test
+    @Rollback
+    public void testFindByName() {
+
+        // given
+        ImagesEntity entity = new ImagesEntity();
+        String name = "image";
+        entity.setName(name);
+        entity.setImg(new byte[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9});
+        entity.setAvalible(true);
+        entity.setType(ImageType.NONE);
+
+        ImagesEntity expectEntity = imagesService.save(entity);
+
+        // when
+        ImagesEntity actualEntity = imagesService.findByName(name);
+
+        //then
+        assertNotNull(actualEntity);
+        assertEquals(expectEntity.getId(), actualEntity.getId());
+        assertEquals(expectEntity, actualEntity);
     }
 
     // public List<ImagesEntity> findAll()

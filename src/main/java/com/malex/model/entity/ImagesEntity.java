@@ -24,6 +24,9 @@ public class ImagesEntity extends BaseEntity {
     @Column(name = "type", nullable = false)
     private ImageType type;
 
+    @OneToOne(mappedBy = "image")
+    private ArticleEntity article;
+
     public ImagesEntity() {
     }
 
@@ -59,13 +62,26 @@ public class ImagesEntity extends BaseEntity {
         this.type = type;
     }
 
+    public ArticleEntity getArticle() {
+        return article;
+    }
+
+    public void setArticle(ArticleEntity article) {
+        this.article = article;
+    }
+
     @Override
     public boolean equals(Object o) {
-
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         ImagesEntity entity = (ImagesEntity) o;
-        return isAvalible == entity.isAvalible && (name != null ? name.equals(entity.name) : entity.name == null && Arrays.equals(img, entity.img) && type == entity.type);
+
+        if (isAvalible != entity.isAvalible) return false;
+        if (name != null ? !name.equals(entity.name) : entity.name != null) return false;
+        if (!Arrays.equals(img, entity.img)) return false;
+        if (type != entity.type) return false;
+        return article != null ? article.equals(entity.article) : entity.article == null;
 
     }
 
@@ -75,6 +91,7 @@ public class ImagesEntity extends BaseEntity {
         result = 31 * result + Arrays.hashCode(img);
         result = 31 * result + (isAvalible ? 1 : 0);
         result = 31 * result + (type != null ? type.hashCode() : 0);
+        result = 31 * result + (article != null ? article.hashCode() : 0);
         return result;
     }
 }

@@ -19,6 +19,10 @@ public class ArticleEntity extends BaseEntity {
     @OneToMany(mappedBy = "articleEntity", fetch = FetchType.EAGER)
     private List<ArticleBlockEntity> blockEntityList;
 
+    @OneToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    @JoinColumn(name = "id_image", unique = true, nullable = false)
+    private ImagesEntity image;
+
     public ArticleEntity() {
     }
 
@@ -46,6 +50,14 @@ public class ArticleEntity extends BaseEntity {
         this.desctiption = desctiption;
     }
 
+    public ImagesEntity getImage() {
+        return image;
+    }
+
+    public void setImage(ImagesEntity image) {
+        this.image = image;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -55,7 +67,9 @@ public class ArticleEntity extends BaseEntity {
 
         if (title != null ? !title.equals(that.title) : that.title != null) return false;
         if (desctiption != null ? !desctiption.equals(that.desctiption) : that.desctiption != null) return false;
-        return blockEntityList != null ? blockEntityList.equals(that.blockEntityList) : that.blockEntityList == null;
+        if (blockEntityList != null ? !blockEntityList.equals(that.blockEntityList) : that.blockEntityList != null)
+            return false;
+        return image != null ? image.equals(that.image) : that.image == null;
 
     }
 
@@ -64,6 +78,7 @@ public class ArticleEntity extends BaseEntity {
         int result = title != null ? title.hashCode() : 0;
         result = 31 * result + (desctiption != null ? desctiption.hashCode() : 0);
         result = 31 * result + (blockEntityList != null ? blockEntityList.hashCode() : 0);
+        result = 31 * result + (image != null ? image.hashCode() : 0);
         return result;
     }
 }
