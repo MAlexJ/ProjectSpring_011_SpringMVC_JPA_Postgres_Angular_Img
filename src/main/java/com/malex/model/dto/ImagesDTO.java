@@ -1,5 +1,7 @@
 package com.malex.model.dto;
 
+import com.malex.model.enums.ImageType;
+
 import java.io.Serializable;
 import java.util.Arrays;
 
@@ -10,6 +12,10 @@ public class ImagesDTO implements Serializable {
     private String name;
 
     private byte[] img;
+
+    private boolean isAvalible;
+
+    private ImageType type;
 
     public ImagesDTO() {
     }
@@ -38,12 +44,34 @@ public class ImagesDTO implements Serializable {
         this.img = img;
     }
 
+    public boolean isAvalible() {
+        return isAvalible;
+    }
+
+    public void setAvalible(boolean avalible) {
+        isAvalible = avalible;
+    }
+
+    public ImageType getType() {
+        return type;
+    }
+
+    public void setType(ImageType type) {
+        this.type = type;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         ImagesDTO dto = (ImagesDTO) o;
-        return id != null ? id.equals(dto.id) : dto.id == null && (name != null ? name.equals(dto.name) : dto.name == null && Arrays.equals(img, dto.img));
+
+        if (isAvalible != dto.isAvalible) return false;
+        if (id != null ? !id.equals(dto.id) : dto.id != null) return false;
+        if (name != null ? !name.equals(dto.name) : dto.name != null) return false;
+        if (!Arrays.equals(img, dto.img)) return false;
+        return type == dto.type;
 
     }
 
@@ -52,6 +80,8 @@ public class ImagesDTO implements Serializable {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + Arrays.hashCode(img);
+        result = 31 * result + (isAvalible ? 1 : 0);
+        result = 31 * result + (type != null ? type.hashCode() : 0);
         return result;
     }
 }

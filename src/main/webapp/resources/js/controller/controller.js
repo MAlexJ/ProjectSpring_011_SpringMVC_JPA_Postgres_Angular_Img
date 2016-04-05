@@ -25,15 +25,19 @@ myApp.controller('adminImageController', function ($scope, $http, fileUpload) {
             $scope.images = data;
         }).error(function (data, status) {
             console.log("код ответа: " + status);
-        });
+        });  
     };
 
     // POST: image -> click to button
-    $scope.uploadFile = function () {
-        var file = $scope.myFile;
-        var uploadUrl = "/images";
-        fileUpload.uploadFileToUrl(file, uploadUrl);
+    $scope.uploadFile = function (imgForm, imgRadio, imgFile) {
+        if (imgForm.$valid && imgRadio.name == true) {
+            fileUpload.uploadFileToUrl(imgFile, "/images", imgRadio);
+        }
     };
+    $scope.imgRadio = {
+        radio: 'NONE'
+    };
+
 
 });
 

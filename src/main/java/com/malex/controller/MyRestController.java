@@ -2,6 +2,7 @@ package com.malex.controller;
 
 import com.malex.model.dto.ImagesDTO;
 import com.malex.model.entity.ArticleEntity;
+import com.malex.model.enums.ImageType;
 import com.malex.service.ArticleService;
 import com.malex.service.ImagesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,14 +33,20 @@ public class MyRestController {
 
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(path = "/images", method = RequestMethod.POST)
-    public void imagePOST(@RequestParam("file") CommonsMultipartFile file) {
-//        if (!file.isEmpty()) {
-//            System.err.println(file.getOriginalFilename());
-//            ImagesDTO entity = new ImagesDTO();
-//            entity.setName(file.getOriginalFilename());
-//            entity.setImg(file.getBytes());
-//            imagesService.saveDTO(entity);
-//        }
+    public void imagePOST(@RequestParam("file") CommonsMultipartFile file,
+                          @RequestParam("type") ImageType type) {
+        if (!file.isEmpty()) {
+            System.err.println(file.getOriginalFilename());
+            System.err.println(type);
+            System.err.println(true);
+
+            ImagesDTO dto = new ImagesDTO();
+            dto.setImg(file.getBytes());
+            dto.setName(file.getOriginalFilename());
+            dto.setType(type);
+            dto.setAvalible(true);
+            imagesService.saveDTO(dto);
+        }
     }
 
     //Article
