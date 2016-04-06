@@ -10,36 +10,41 @@ myApp.controller('articleController', function () {
 
 });
 
-myApp.controller('adminImageController', function ($scope, $http, fileUpload) {
+myApp.controller('adminImageController', function ($scope, $http) {
+    
 
     // GET: list -> request get
     $http.get('/images').success(function (data) {
         $scope.images = data;
     }).error(function (data, status) {
         console.log("код ответа: " + status);
-    });
-
-    // GET: list -> click to button
-    $scope.viewImage = function () {
-        $http.get('/images').success(function (data) {
-            $scope.images = data;
-        }).error(function (data, status) {
-            console.log("код ответа: " + status);
-        });  
-    };
+    });    
 
     // POST: image -> click to button
     $scope.uploadFile = function (imgForm, imgRadio, imgFile) {
         if (imgForm.$valid && imgRadio.name == true) {
-            fileUpload.uploadFileToUrl(imgFile, "/images", imgRadio);
-            this.imgRadio.radio='NONE';
-            this.imgRadio.name = false;           
+            var fd = new FormData();
+            fd.append('file', imgFile);
+            fd.append('type', imgRadio.radio);
+            $http.post("/images", fd, {
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined}
+            }).success(function () {
+
+                // repeat: get list
+                $http.get('/images').success(function (data) {
+                    $scope.images = data;
+                }).error(function (data, status) {
+                    console.log("код ответа: " + status);
+                });
+            });
+            this.imgRadio.radio = 'NONE';
+            this.imgRadio.name = false;
         }
     };
     $scope.imgRadio = {
         radio: 'NONE'
     };
-
 
     //DELETE
     $scope.deleteImg = function (selectOptDel) {
@@ -59,8 +64,6 @@ myApp.controller('adminImageController', function ($scope, $http, fileUpload) {
             console.log('Error');
         }
     };
-
-
 });
 
 myApp.controller('adminArticleController', function ($scope, $http) {

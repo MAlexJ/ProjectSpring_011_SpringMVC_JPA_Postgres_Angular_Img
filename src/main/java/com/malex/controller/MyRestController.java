@@ -13,7 +13,6 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import java.util.List;
 
-// https://www.npmjs.com/package/ng-file-upload#server example upload Angular + Spring MVC
 @RestController
 public class MyRestController {
 
@@ -23,7 +22,6 @@ public class MyRestController {
     @Autowired
     private ArticleService articleService;
 
-    // // Images: GET -> /images
     @RequestMapping(path = "/images", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
@@ -31,7 +29,6 @@ public class MyRestController {
         return this.imagesService.findAllDTO();
     }
 
-    // // Images: POST -> /images
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(path = "/images", method = RequestMethod.POST)
     public void imagePOST(@RequestParam("file") CommonsMultipartFile file,
@@ -50,7 +47,6 @@ public class MyRestController {
         }
     }
 
-    // Images: DELETE -> /images/{id}.
     @RequestMapping(path = "/images/{id}", method = RequestMethod.DELETE)
     public void imageDelete(@PathVariable Long id) {
         if (id > 0) {
@@ -58,7 +54,6 @@ public class MyRestController {
         }
     }
 
-    //Article
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(path = "/article", method = RequestMethod.POST)
     public void articlePOST(@RequestBody ArticleEntity entity) {
