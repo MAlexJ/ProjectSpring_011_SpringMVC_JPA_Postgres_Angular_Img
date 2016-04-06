@@ -13,6 +13,3 @@ myApp.service('fileUpload', function ($http) {
     };
 
 });
-
-
-

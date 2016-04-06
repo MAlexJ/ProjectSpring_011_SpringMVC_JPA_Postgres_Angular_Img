@@ -12,7 +12,7 @@ myApp.controller('articleController', function () {
 
 myApp.controller('adminImageController', function ($scope, $http, fileUpload) {
 
-    // GET: list -> request get  
+    // GET: list -> request get
     $http.get('/images').success(function (data) {
         $scope.images = data;
     }).error(function (data, status) {
@@ -32,10 +32,32 @@ myApp.controller('adminImageController', function ($scope, $http, fileUpload) {
     $scope.uploadFile = function (imgForm, imgRadio, imgFile) {
         if (imgForm.$valid && imgRadio.name == true) {
             fileUpload.uploadFileToUrl(imgFile, "/images", imgRadio);
+            this.imgRadio.radio='NONE';
+            this.imgRadio.name = false;           
         }
     };
     $scope.imgRadio = {
         radio: 'NONE'
+    };
+
+
+    //DELETE
+    $scope.deleteImg = function (selectOptDel) {
+        if (selectOptDel > 0) {
+
+            $http.delete('/images/' + selectOptDel).success(function () {
+
+                // repeat: get list
+                $http.get('/images').success(function (data) {
+                    $scope.images = data;
+                }).error(function (data, status) {
+                    console.log("код ответа: " + status);
+                });
+            });
+        }
+        else {
+            console.log('Error');
+        }
     };
 
 

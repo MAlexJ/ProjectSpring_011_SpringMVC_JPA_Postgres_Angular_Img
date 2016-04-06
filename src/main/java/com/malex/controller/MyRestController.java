@@ -23,7 +23,7 @@ public class MyRestController {
     @Autowired
     private ArticleService articleService;
 
-    // Images
+    // // Images: GET -> /images
     @RequestMapping(path = "/images", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
@@ -31,6 +31,7 @@ public class MyRestController {
         return this.imagesService.findAllDTO();
     }
 
+    // // Images: POST -> /images
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(path = "/images", method = RequestMethod.POST)
     public void imagePOST(@RequestParam("file") CommonsMultipartFile file,
@@ -46,6 +47,14 @@ public class MyRestController {
             dto.setType(type);
             dto.setAvalible(true);
             imagesService.saveDTO(dto);
+        }
+    }
+
+    // Images: DELETE -> /images/{id}.
+    @RequestMapping(path = "/images/{id}", method = RequestMethod.DELETE)
+    public void imageDelete(@PathVariable Long id) {
+        if (id > 0) {
+            imagesService.delete(id);
         }
     }
 
