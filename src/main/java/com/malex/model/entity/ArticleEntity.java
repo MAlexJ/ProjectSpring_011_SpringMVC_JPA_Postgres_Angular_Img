@@ -3,7 +3,6 @@ package com.malex.model.entity;
 import com.malex.model.entity.templ.BaseEntity;
 
 import javax.persistence.*;
-import java.util.Arrays;
 import java.util.List;
 
 @Entity

@@ -1,6 +1,5 @@
 package com.malex.service.impl;
 
-
 import com.malex.config.AppConfigTest;
 import com.malex.model.entity.ImagesEntity;
 import com.malex.model.enums.ImageType;
@@ -15,6 +14,7 @@ import org.springframework.test.context.junit4.AbstractTransactionalJUnit4Spring
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -39,7 +39,7 @@ public class ImagesServiceImplTest extends AbstractTransactionalJUnit4SpringCont
         ImagesEntity expectEntity = new ImagesEntity();
         expectEntity.setName("image");
         expectEntity.setImg(new byte[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9});
-        expectEntity.setAvalible(true);
+        expectEntity.setAvailable(true);
         expectEntity.setType(ImageType.NONE);
 
         // when
@@ -59,13 +59,13 @@ public class ImagesServiceImplTest extends AbstractTransactionalJUnit4SpringCont
         ImagesEntity entity = new ImagesEntity();
         entity.setName("image");
         entity.setImg(new byte[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9});
-        entity.setAvalible(true);
+        entity.setAvailable(true);
         entity.setType(ImageType.NONE);
 
         ImagesEntity expectEntity = imagesService.save(entity);
         expectEntity.setName("image2");
         expectEntity.setImg(new byte[]{3, 1, 5, 4, 7, 5});
-        expectEntity.setAvalible(false);
+        expectEntity.setAvailable(false);
         expectEntity.setType(ImageType.ARTICLE);
 
         // when
@@ -85,7 +85,7 @@ public class ImagesServiceImplTest extends AbstractTransactionalJUnit4SpringCont
         ImagesEntity entity = new ImagesEntity();
         entity.setName("image");
         entity.setImg(new byte[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9});
-        entity.setAvalible(true);
+        entity.setAvailable(true);
         entity.setType(ImageType.NONE);
 
         ImagesEntity expectEntity = imagesService.save(entity);
@@ -106,7 +106,7 @@ public class ImagesServiceImplTest extends AbstractTransactionalJUnit4SpringCont
         ImagesEntity entity = new ImagesEntity();
         entity.setName("image");
         entity.setImg(new byte[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9});
-        entity.setAvalible(true);
+        entity.setAvailable(true);
         entity.setType(ImageType.NONE);
 
         ImagesEntity expectEntity = imagesService.save(entity);
@@ -130,7 +130,7 @@ public class ImagesServiceImplTest extends AbstractTransactionalJUnit4SpringCont
         String name = "image";
         entity.setName(name);
         entity.setImg(new byte[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9});
-        entity.setAvalible(true);
+        entity.setAvailable(true);
         entity.setType(ImageType.NONE);
 
         ImagesEntity expectEntity = imagesService.save(entity);
@@ -154,7 +154,7 @@ public class ImagesServiceImplTest extends AbstractTransactionalJUnit4SpringCont
             ImagesEntity entity = new ImagesEntity();
             entity.setName("image" + i);
             entity.setImg(new byte[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9});
-            entity.setAvalible((i % 2 == 0));
+            entity.setAvailable((i % 2 == 0));
             entity.setType((i % 2 == 0) ? ImageType.NONE : ImageType.BLOCK);
             expectEntityList.add(entity);
             imagesService.save(entity);
@@ -168,4 +168,27 @@ public class ImagesServiceImplTest extends AbstractTransactionalJUnit4SpringCont
         assertEquals(expectEntityList, actualEntityList);
     }
 
+    // List<ImagesEntity> findByIsAvailable(boolean isAvailable);
+    @Test
+    @Rollback
+    public void testFindByIsAvailable() {
+        // given
+        List<ImagesEntity> expectEntityList = new LinkedList<>();
+        for (int i = 0; i < 5; i++) {
+            ImagesEntity entity = new ImagesEntity();
+            entity.setName("image" + i);
+            entity.setImg(new byte[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9});
+            entity.setAvailable((i % 2 == 0));
+            entity.setType(ImageType.NONE);
+            expectEntityList.add(entity);
+            imagesService.save(entity);
+        }
+
+        // when
+        List<ImagesEntity> actualEntityList = imagesService.findByIsAvailable(true);
+
+        //then
+        assertNotNull(actualEntityList);
+        assertEquals(3, actualEntityList.size());
+    }
 }

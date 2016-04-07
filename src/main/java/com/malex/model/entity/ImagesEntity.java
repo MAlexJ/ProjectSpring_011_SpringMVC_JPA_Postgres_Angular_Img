@@ -2,6 +2,7 @@ package com.malex.model.entity;
 
 import com.malex.model.entity.templ.BaseEntity;
 import com.malex.model.enums.ImageType;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.Arrays;
@@ -15,10 +16,11 @@ public class ImagesEntity extends BaseEntity {
 
     @Lob
     @Column(name = "img", nullable = false)
+    @Type(type = "org.hibernate.type.BinaryType")
     private byte[] img;
 
-    @Column(name = "avalible", nullable = false)
-    private boolean isAvalible;
+    @Column(name = "available", nullable = false)
+    private boolean isAvailable;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "type", nullable = false)
@@ -46,12 +48,12 @@ public class ImagesEntity extends BaseEntity {
         this.img = img;
     }
 
-    public boolean isAvalible() {
-        return isAvalible;
+    public boolean isAvailable() {
+        return isAvailable;
     }
 
-    public void setAvalible(boolean avalible) {
-        isAvalible = avalible;
+    public void setAvailable(boolean available) {
+        isAvailable = available;
     }
 
     public ImageType getType() {
@@ -77,7 +79,7 @@ public class ImagesEntity extends BaseEntity {
 
         ImagesEntity entity = (ImagesEntity) o;
 
-        if (isAvalible != entity.isAvalible) return false;
+        if (isAvailable != entity.isAvailable) return false;
         if (name != null ? !name.equals(entity.name) : entity.name != null) return false;
         if (!Arrays.equals(img, entity.img)) return false;
         if (type != entity.type) return false;
@@ -89,7 +91,7 @@ public class ImagesEntity extends BaseEntity {
     public int hashCode() {
         int result = name != null ? name.hashCode() : 0;
         result = 31 * result + Arrays.hashCode(img);
-        result = 31 * result + (isAvalible ? 1 : 0);
+        result = 31 * result + (isAvailable ? 1 : 0);
         result = 31 * result + (type != null ? type.hashCode() : 0);
         result = 31 * result + (article != null ? article.hashCode() : 0);
         return result;

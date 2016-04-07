@@ -150,7 +150,7 @@ public class ArticleServiceImplTest extends AbstractTransactionalJUnit4SpringCon
         actualArticleEntity.setDesctiption("NewDesk");
         actualArticleEntity.setTitle("NewTitle");
         actualArticleEntity.getImage().setType(ImageType.BLOCK);
-        actualArticleEntity.getImage().setAvalible(false);
+        actualArticleEntity.getImage().setAvailable(false);
         actualArticleEntity.getImage().setName("newNAme");
 
         ArticleEntity expectArticleEntity = articleService.update(actualArticleEntity);
@@ -175,7 +175,7 @@ public class ArticleServiceImplTest extends AbstractTransactionalJUnit4SpringCon
 
         // need update ImageEntity
         ImagesEntity imagesEntity = ImagesEntityUtil.getImagesEntity();
-        imagesEntity.setAvalible(true);
+        imagesEntity.setAvailable(true);
         imagesEntity.setType(ImageType.ARTICLE);
         ImagesEntity expectImagesEntity = imagesService.save(imagesEntity);
 
@@ -263,10 +263,8 @@ public class ArticleServiceImplTest extends AbstractTransactionalJUnit4SpringCon
         // when
         List<ArticleEntity> actualArticleEntityList = articleService.findAll();
 
-
         //then
         assertNotNull(actualArticleEntityList);
         assertEquals(expectArticleEntityList, actualArticleEntityList);
-
     }
 }

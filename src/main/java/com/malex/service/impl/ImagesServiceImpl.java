@@ -38,6 +38,17 @@ public class ImagesServiceImpl implements ImagesService {
     }
 
     @Override
+    public List<ImagesDTO> findByIsAvailableDTO(boolean isAvailable) {
+        List<ImagesDTO> entityListDTO = new ArrayList<>();
+        List<ImagesEntity> entityList = repository.findByIsAvailable(isAvailable);
+        for (ImagesEntity entity : entityList) {
+            entityListDTO.add(beanMapper.map(entity, ImagesDTO.class));
+        }
+        return entityListDTO;
+    }
+
+
+    @Override
     public ImagesEntity save(ImagesEntity entity) {
         return this.repository.saveAndFlush(entity);
     }
@@ -65,5 +76,10 @@ public class ImagesServiceImpl implements ImagesService {
     @Override
     public List<ImagesEntity> findAll() {
         return this.repository.findAll();
+    }
+
+    @Override
+    public List<ImagesEntity> findByIsAvailable(boolean isAvailable) {
+        return repository.findByIsAvailable(isAvailable);
     }
 }

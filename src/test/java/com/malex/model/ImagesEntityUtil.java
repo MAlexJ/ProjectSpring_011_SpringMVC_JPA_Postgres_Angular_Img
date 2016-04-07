@@ -13,7 +13,7 @@ public class ImagesEntityUtil {
         ImagesEntity entity = new ImagesEntity();
         entity.setName("image");
         entity.setImg(new byte[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9});
-        entity.setAvalible(true);
+        entity.setAvailable(true);
         entity.setType(ImageType.NONE);
         return entity;
     }
@@ -25,7 +25,7 @@ public class ImagesEntityUtil {
             ImagesEntity entity = new ImagesEntity();
             entity.setName("image" + i);
             entity.setImg(new byte[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9});
-            entity.setAvalible((i % 2 == 0));
+            entity.setAvailable((i % 2 == 0));
             entity.setType((i % 2 == 0) ? ImageType.NONE : ImageType.BLOCK);
             entityList.add(entity);
 

@@ -13,7 +13,7 @@ public class ImagesDTO implements Serializable {
 
     private byte[] img;
 
-    private boolean isAvalible;
+    private boolean isAvailable;
 
     private ImageType type;
 
@@ -44,12 +44,12 @@ public class ImagesDTO implements Serializable {
         this.img = img;
     }
 
-    public boolean isAvalible() {
-        return isAvalible;
+    public boolean isAvailable() {
+        return isAvailable;
     }
 
-    public void setAvalible(boolean avalible) {
-        isAvalible = avalible;
+    public void setAvailable(boolean available) {
+        isAvailable = available;
     }
 
     public ImageType getType() {
@@ -67,7 +67,7 @@ public class ImagesDTO implements Serializable {
 
         ImagesDTO dto = (ImagesDTO) o;
 
-        if (isAvalible != dto.isAvalible) return false;
+        if (isAvailable != dto.isAvailable) return false;
         if (id != null ? !id.equals(dto.id) : dto.id != null) return false;
         if (name != null ? !name.equals(dto.name) : dto.name != null) return false;
         if (!Arrays.equals(img, dto.img)) return false;
@@ -80,7 +80,7 @@ public class ImagesDTO implements Serializable {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + Arrays.hashCode(img);
-        result = 31 * result + (isAvalible ? 1 : 0);
+        result = 31 * result + (isAvailable ? 1 : 0);
         result = 31 * result + (type != null ? type.hashCode() : 0);
         return result;
     }

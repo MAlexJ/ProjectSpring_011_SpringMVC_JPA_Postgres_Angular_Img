@@ -12,6 +12,8 @@ public interface ImagesService {
 
     List<ImagesDTO> findAllDTO();
 
+    List<ImagesDTO> findByIsAvailableDTO(boolean isAvailable);
+
     // ImagesEntity
     ImagesEntity save(ImagesEntity entity);
 
@@ -24,4 +26,6 @@ public interface ImagesService {
     ImagesEntity findByName(String name);
 
     List<ImagesEntity> findAll();
+
+    List<ImagesEntity> findByIsAvailable(boolean isAvailable);
 }

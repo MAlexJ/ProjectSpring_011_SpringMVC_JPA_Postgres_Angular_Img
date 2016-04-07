@@ -26,7 +26,7 @@ public class MyRestController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public List<ImagesDTO> imageGET() {
-        return this.imagesService.findAllDTO();
+        return imagesService.findByIsAvailableDTO(true);
     }
 
     @ResponseStatus(HttpStatus.OK)
@@ -42,7 +42,7 @@ public class MyRestController {
             dto.setImg(file.getBytes());
             dto.setName(file.getOriginalFilename());
             dto.setType(type);
-            dto.setAvalible(true);
+            dto.setAvailable(true);
             imagesService.saveDTO(dto);
         }
     }
