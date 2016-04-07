@@ -1,6 +1,7 @@
 package com.malex.model.entity;
 
 import com.malex.model.entity.templ.BaseEntity;
+import com.malex.model.enums.ArticleCategory;
 
 import javax.persistence.*;
 import java.util.List;
@@ -14,6 +15,10 @@ public class ArticleEntity extends BaseEntity {
 
     @Column(name = "desctiption", nullable = false)
     private String desctiption;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "category", nullable = false)
+    private ArticleCategory category;
 
     @OneToMany(mappedBy = "articleEntity", fetch = FetchType.EAGER)
     private List<ArticleBlockEntity> blockEntityList;
@@ -57,6 +62,14 @@ public class ArticleEntity extends BaseEntity {
         this.image = image;
     }
 
+    public ArticleCategory getCategory() {
+        return category;
+    }
+
+    public void setCategory(ArticleCategory category) {
+        this.category = category;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -66,6 +79,7 @@ public class ArticleEntity extends BaseEntity {
 
         if (title != null ? !title.equals(that.title) : that.title != null) return false;
         if (desctiption != null ? !desctiption.equals(that.desctiption) : that.desctiption != null) return false;
+        if (category != that.category) return false;
         if (blockEntityList != null ? !blockEntityList.equals(that.blockEntityList) : that.blockEntityList != null)
             return false;
         return image != null ? image.equals(that.image) : that.image == null;
@@ -76,6 +90,7 @@ public class ArticleEntity extends BaseEntity {
     public int hashCode() {
         int result = title != null ? title.hashCode() : 0;
         result = 31 * result + (desctiption != null ? desctiption.hashCode() : 0);
+        result = 31 * result + (category != null ? category.hashCode() : 0);
         result = 31 * result + (blockEntityList != null ? blockEntityList.hashCode() : 0);
         result = 31 * result + (image != null ? image.hashCode() : 0);
         return result;

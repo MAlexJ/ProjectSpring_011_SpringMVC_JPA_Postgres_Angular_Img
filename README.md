@@ -53,4 +53,13 @@ The mechanism strips the prefixes find…By, read…By, query…By, count…By, 
 
  List<Person> findByEmailAddressAndLastname(EmailAddress emailAddress, String lastname);
 
+8.
+Getting all names in an enum as a String[]
+http://stackoverflow.com/questions/13783295/getting-all-names-in-an-enum-as-a-string
 
+Here`s an elegant solution using Apache commons-lang3:
+EnumUtils.getEnumList(State.class)
+Although it returns a List, you can convert the list easily with list.toArray()
+
+List<ArticleCategory> enumList = EnumUtils.getEnumList(ArticleCategory.class);
+  ->>>> [ANGULAR_JS, JAVA_SE, JAVA_JEE, SPRING, POSTGRES, NONE]

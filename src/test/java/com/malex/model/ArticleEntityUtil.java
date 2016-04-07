@@ -3,6 +3,7 @@ package com.malex.model;
 
 import com.malex.model.entity.ArticleEntity;
 import com.malex.model.entity.ImagesEntity;
+import com.malex.model.enums.ArticleCategory;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -13,6 +14,7 @@ public class ArticleEntityUtil {
         ArticleEntity entity = new ArticleEntity();
         entity.setTitle("Title");
         entity.setDesctiption("Descr");
+        entity.setCategory(ArticleCategory.POSTGRES);
         entity.setImage(ImagesEntityUtil.getImagesEntity());
         return entity;
     }
@@ -23,6 +25,7 @@ public class ArticleEntityUtil {
             ArticleEntity entity = new ArticleEntity();
             entity.setTitle("Title"+i);
             entity.setDesctiption("Descr"+i);
+            entity.setCategory(ArticleCategory.POSTGRES);
 
             ImagesEntity imagesEntity = ImagesEntityUtil.getImagesEntity();
             imagesEntity.setName("Name"+i);

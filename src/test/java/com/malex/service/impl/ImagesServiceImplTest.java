@@ -51,6 +51,26 @@ public class ImagesServiceImplTest extends AbstractTransactionalJUnit4SpringCont
 
     }
 
+    //public ImagesEntity save(ImagesEntity entity)
+    @Test
+    @Rollback
+    public void testSaveType() {
+        // given
+        ImagesEntity expectEntity = new ImagesEntity();
+        expectEntity.setName("image");
+        expectEntity.setImg(new byte[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9});
+        expectEntity.setAvailable(true);
+        expectEntity.setType(ImageType.ARTICLE);
+
+        // when
+        ImagesEntity actualEntity = imagesService.save(expectEntity);
+
+        //then
+        assertNotNull(actualEntity);
+        assertEquals(ImageType.ARTICLE, actualEntity.getType());
+
+    }
+
     //public ImagesEntity update(ImagesEntity entity)
     @Test
     @Rollback

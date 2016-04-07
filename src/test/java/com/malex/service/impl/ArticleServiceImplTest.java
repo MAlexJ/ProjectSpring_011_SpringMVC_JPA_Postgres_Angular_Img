@@ -5,6 +5,7 @@ import com.malex.model.ArticleEntityUtil;
 import com.malex.model.ImagesEntityUtil;
 import com.malex.model.entity.ArticleEntity;
 import com.malex.model.entity.ImagesEntity;
+import com.malex.model.enums.ArticleCategory;
 import com.malex.model.enums.ImageType;
 import com.malex.service.ArticleService;
 import com.malex.service.ImagesService;
@@ -50,6 +51,7 @@ public class ArticleServiceImplTest extends AbstractTransactionalJUnit4SpringCon
         ArticleEntity articleEntity = new ArticleEntity();
         articleEntity.setTitle("Title");
         articleEntity.setDesctiption("Descr");
+        articleEntity.setCategory(ArticleCategory.NONE);
 
         // when
         ArticleEntity actualArticleEntity = articleService.save(articleEntity);
@@ -67,6 +69,7 @@ public class ArticleServiceImplTest extends AbstractTransactionalJUnit4SpringCon
         ArticleEntity expectArticleEntity = new ArticleEntity();
         expectArticleEntity.setTitle("Title");
         expectArticleEntity.setDesctiption("Descr");
+        expectArticleEntity.setCategory(ArticleCategory.ANGULAR_JS);
         expectArticleEntity.setImage(ImagesEntityUtil.getImagesEntity());
 
         // when
@@ -89,6 +92,7 @@ public class ArticleServiceImplTest extends AbstractTransactionalJUnit4SpringCon
         ArticleEntity expectArticleEntity = new ArticleEntity();
         expectArticleEntity.setTitle("Title");
         expectArticleEntity.setDesctiption("Descr");
+        expectArticleEntity.setCategory(ArticleCategory.ANGULAR_JS);
         ImagesEntity imagesEntity = imagesService.save(ImagesEntityUtil.getImagesEntity());
         expectArticleEntity.setImage(imagesEntity);
 
@@ -113,6 +117,8 @@ public class ArticleServiceImplTest extends AbstractTransactionalJUnit4SpringCon
         ArticleEntity entity = new ArticleEntity();
         entity.setTitle("Title");
         entity.setDesctiption("Descr");
+        entity.setCategory(ArticleCategory.POSTGRES);
+
         entity.setImage(ImagesEntityUtil.getImagesEntity());
 
         ArticleEntity actualArticleEntity = articleService.save(entity);
@@ -142,6 +148,7 @@ public class ArticleServiceImplTest extends AbstractTransactionalJUnit4SpringCon
         ArticleEntity entity = new ArticleEntity();
         entity.setTitle("Title");
         entity.setDesctiption("Descr");
+        entity.setCategory(ArticleCategory.POSTGRES);
         entity.setImage(ImagesEntityUtil.getImagesEntity());
 
         ArticleEntity actualArticleEntity = articleService.save(entity);
@@ -172,6 +179,7 @@ public class ArticleServiceImplTest extends AbstractTransactionalJUnit4SpringCon
         ArticleEntity expectArticleEntity = new ArticleEntity();
         expectArticleEntity.setTitle("Title");
         expectArticleEntity.setDesctiption("Descr");
+        expectArticleEntity.setCategory(ArticleCategory.POSTGRES);
 
         // need update ImageEntity
         ImagesEntity imagesEntity = ImagesEntityUtil.getImagesEntity();
@@ -207,6 +215,7 @@ public class ArticleServiceImplTest extends AbstractTransactionalJUnit4SpringCon
         ArticleEntity entity = new ArticleEntity();
         entity.setTitle("Title");
         entity.setDesctiption("Descr");
+        entity.setCategory(ArticleCategory.POSTGRES);
         entity.setImage(ImagesEntityUtil.getImagesEntity());
 
         ArticleEntity expectArticleEntity = articleService.save(entity);
@@ -233,6 +242,7 @@ public class ArticleServiceImplTest extends AbstractTransactionalJUnit4SpringCon
         ArticleEntity entity = new ArticleEntity();
         entity.setTitle("Title");
         entity.setDesctiption("Descr");
+        entity.setCategory(ArticleCategory.POSTGRES);
 
         ImagesEntity expectImagesEntity = imagesService.save(ImagesEntityUtil.getImagesEntity());
         entity.setImage(expectImagesEntity);
