@@ -16,11 +16,14 @@ public interface ImagesService {
 
     List<ImagesDTO> findByIsAvailableDTO(boolean isAvailable);
 
-    ImagesDataDTO findAllWithData(boolean isAvailable, ImageType type);
-
     ImagesDTO findByNameDTO(String name);
 
     List<ImagesDTO> findByIsAvailableAndTypeDTO(boolean isAvailable, ImageType type);
+
+
+    // ImagesDataDTO
+    ImagesDataDTO findAllWithData(boolean isAvailable, ImageType type);
+
 
     // ImagesEntity
     ImagesEntity save(ImagesEntity entity);

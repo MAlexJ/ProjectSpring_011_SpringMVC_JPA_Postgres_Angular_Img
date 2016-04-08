@@ -1,6 +1,7 @@
 package com.malex.controller;
 
 import com.malex.model.dto.ArticleDTO;
+import com.malex.model.dto.ArticleFindDTO;
 import com.malex.model.dto.ImagesDTO;
 import com.malex.model.dto.ImagesDataDTO;
 import com.malex.model.entity.ImagesEntity;
@@ -70,15 +71,21 @@ public class MyRestController {
         // ImagesDTO imagesDTO = imagesService.findByNameDTO(entity.getImageName()); //TODO implements config DOZER
 
         ImagesEntity imagesEntity = imagesService.findByName(entity.getImageName());
+        imagesEntity.setAvailable(false);
 
         ArticleDTO articleDTO = new ArticleDTO();
         articleDTO.setTitle(entity.getTitle());
         articleDTO.setDescription(entity.getDescription());
         articleDTO.setCategory(entity.getEnumType());
-        articleDTO.setImage(imagesEntity);
+        articleDTO.setImage( imagesService.update(imagesEntity));
 
         articleService.saveDTO(articleDTO);
     }
 
-
+    @RequestMapping(path = "/category", method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public List<ArticleFindDTO> categoryGET() {
+        return articleService.findAllDTO();
+    }
 }

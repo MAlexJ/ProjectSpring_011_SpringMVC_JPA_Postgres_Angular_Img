@@ -75,7 +75,25 @@ myApp.controller('adminArticleController', function ($scope, $http) {
         console.log("код ответа: " + status);
     });
 
+    // GET: list -> request get
+    $http.get('/category').success(function (data) {
+        $scope.articleData = data;
+    }).error(function (data, status) {
+        console.log("код ответа: " + status);
+    });
 
+    // GET: Id {id} -> request get
+    $scope.getArticle = function (articleFormPreview) {
+        if (articleFormPreview.$valid) {
+            var id = this.selectArticleData;
+            $http.get('/article/' + id).success(function () {
+            }).error(function (data, status) {
+                console.log("код ответа: " + status);
+            });
+        }
+    };
+
+    // POST: article -> click to button
     $scope.save = function (article, eList, imgList, articleForm) {
         if (articleForm.$valid && imgList != '') {
             var articleCreate = {
@@ -92,6 +110,19 @@ myApp.controller('adminArticleController', function ($scope, $http) {
                 }
             }).success(function () {
 
+                // GET: list article -> request get
+                $http.get('/article').success(function (data) {
+                    $scope.imgData = data;
+                }).error(function (data, status) {
+                    console.log("код ответа: " + status);
+                });
+
+                // GET: list category -> request get
+                $http.get('/category').success(function (data) {
+                    $scope.articleData = data;
+                }).error(function (data, status) {
+                    console.log("код ответа: " + status);
+                });
 
             });
         }

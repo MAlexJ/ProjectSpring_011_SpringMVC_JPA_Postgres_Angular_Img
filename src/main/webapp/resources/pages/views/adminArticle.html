@@ -8,6 +8,7 @@
             <div class="card blue-grey darken-1">
                 <div class="card-content white-text">
                     <form name="articleForm">
+                        <h5>Create Article</h5>
                         <h6>Description</h6>
                         <input ng-model="article.description" type="text" placeholder="Description" required=""/>
 
@@ -17,7 +18,7 @@
 
                         <h6>Category</h6>
                         <label class="black-text">
-                            <select style="display: block"  required=""
+                            <select style="display: block" required=""
                                     ng-model="eList"
                                     ng-options="eList for eList in imgData.enumList">
                                 <option value="" disabled="">Select Category</option>
@@ -26,7 +27,7 @@
 
                         <h6>Image</h6>
                         <label class="black-text">
-                            <select style="display: block"  required=""
+                            <select style="display: block" required=""
                                     ng-model="imgList"
                                     ng-options="imgList for imgList in imgData.nameImg">
                                 <option value="" disabled="">Select Image</option>
@@ -36,26 +37,37 @@
                         <p></p>
                         <h6>Article</h6>
                         <p></p>
-                        <button ng-click="save(article, eList, imgList, articleForm)" class="waves-effect waves-light btn">Create
+                        <button ng-click="save(article, eList, imgList, articleForm)"
+                                class="waves-effect waves-light btn">Create
                             Article
                         </button>
                     </form>
                 </div>
             </div>
 
-            <div class="col s6 m6">
-                <div class="card hoverable">
-                    <div class="card-image">
-                        <img src="http://materializecss.com/images/sample-1.jpg" class="photo"/>
-                        <span class="card-title">La al la</span>
-                    </div>
-                    <div class="card-content">
-                        <p>La la la</p>
-                    </div>
-                </div>
-            </div>
-
         </div>
 
+        <div class="col s6 m5">
+            <div class="card blue-grey darken-1">
+                <div class="card-content white-text">
+                    <form name="articleFormPreview">
+                        <h5>Preview Article</h5>
+                        <h6>Select</h6>
+                        <label class="black-text">
+                            <select style="display: block" required=""
+                                    ng-model="selectArticleData"
+                                    ng-options="value.id as value.title group by value.category for value in articleData">
+                                <option value="" disabled="">Select Category</option>
+                            </select>
+
+                        </label>
+                        <h6>Preview Article</h6>
+                        <button ng-click="getArticle(articleFormPreview)"
+                                class="waves-effect waves-light btn"> Preview
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

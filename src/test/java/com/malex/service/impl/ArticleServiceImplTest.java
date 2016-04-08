@@ -2,6 +2,7 @@ package com.malex.service.impl;
 
 import com.malex.config.AppConfigTest;
 import com.malex.model.ImagesEntityUtil;
+import com.malex.model.dto.ArticleFindDTO;
 import com.malex.model.entity.ArticleEntity;
 import com.malex.model.entity.ImagesEntity;
 import com.malex.model.enums.ArticleCategory;
@@ -282,12 +283,36 @@ public class ArticleServiceImplTest extends AbstractTransactionalJUnit4SpringCon
             expectArticleEntityList.add(articleService.save(entity));
         }
 
-
         // when
         List<ArticleEntity> actualArticleEntityList = articleService.findAll();
 
         //then
         assertNotNull(actualArticleEntityList);
         assertEquals(expectArticleEntityList, actualArticleEntityList);
+    }
+
+    // public List<ArticleFindDTO> findAllDTO()
+    @Test
+    @Rollback
+    public void testFindAllDTO() {
+        for (int i = 0; i < 2; i++) {
+            ArticleEntity entity = new ArticleEntity();
+            entity.setTitle("Title");
+            entity.setDescription("Descr");
+            entity.setCategory(ArticleCategory.ANGULAR_JS);
+
+            ImagesEntity img = ImagesEntityUtil.getImagesEntity();
+            img.setName("ManeImg" + i);
+            ImagesEntity expectImagesEntity = imagesService.save(img);
+            entity.setImage(expectImagesEntity);
+            articleService.save(entity);
+        }
+
+        // when
+        List<ArticleFindDTO> allDTO = articleService.findAllDTO();
+
+        //then
+        assertNotNull(allDTO);
+        assertEquals(2, allDTO.size());
     }
 }

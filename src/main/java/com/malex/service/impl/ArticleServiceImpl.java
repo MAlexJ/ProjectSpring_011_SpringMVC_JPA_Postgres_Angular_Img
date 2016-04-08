@@ -1,6 +1,7 @@
 package com.malex.service.impl;
 
 import com.malex.model.dto.ArticleDTO;
+import com.malex.model.dto.ArticleFindDTO;
 import com.malex.model.entity.ArticleEntity;
 import com.malex.repository.ArticleRepository;
 import com.malex.service.ArticleService;
@@ -8,6 +9,7 @@ import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -24,6 +26,15 @@ public class ArticleServiceImpl implements ArticleService {
         ArticleEntity entity = beanMapper.map(entityDTO, ArticleEntity.class);
         entity = repository.save(entity);
         return beanMapper.map(entity, ArticleDTO.class);
+    }
+
+    @Override
+    public List<ArticleFindDTO> findAllDTO() {
+        List<ArticleFindDTO> listDTO = new ArrayList<>();
+        for (ArticleEntity entity : findAll()) {
+            listDTO.add(beanMapper.map(entity, ArticleFindDTO.class));
+        }
+        return listDTO;
     }
 
     @Override
@@ -50,4 +61,5 @@ public class ArticleServiceImpl implements ArticleService {
     public List<ArticleEntity> findAll() {
         return this.repository.findAll();
     }
+
 }

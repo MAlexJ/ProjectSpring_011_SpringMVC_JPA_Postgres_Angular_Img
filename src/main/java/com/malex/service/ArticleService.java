@@ -1,14 +1,21 @@
 package com.malex.service;
 
 import com.malex.model.dto.ArticleDTO;
+import com.malex.model.dto.ArticleFindDTO;
 import com.malex.model.entity.ArticleEntity;
 
 import java.util.List;
 
 public interface ArticleService {
 
+    // ArticleDTO
     ArticleDTO saveDTO(ArticleDTO entity);
 
+    // ArticleFindDTO
+
+    List<ArticleFindDTO> findAllDTO();
+
+    // ArticleEntity
     ArticleEntity save(ArticleEntity entity);
 
     ArticleEntity update(ArticleEntity entity);

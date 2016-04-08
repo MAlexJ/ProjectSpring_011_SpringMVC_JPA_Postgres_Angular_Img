@@ -68,3 +68,11 @@ http://ru.stackoverflow.com/questions/456623/%D0%9D%D0%B0%D0%B3%D0%BB%D1%8F%D0%B
   ->>>>  ValueObject. Единица из парадигмы DDD, которой не нужен id, т.к. она немутируемая,
 т.е. не изменяется по ходу. Судя по всему, может иметь логику,
 которая не мешает ей быть немутируемой.
+
+10.
+http://tutorialzine.com/2013/08/learn-angularjs-5-examples/
+-> Navigation Menu
+
+11.
+Angular.js: ng-select and ng-options
+https://dzone.com/articles/angularjs-ng-select-and-ng-0
