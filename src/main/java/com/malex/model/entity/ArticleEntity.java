@@ -1,5 +1,7 @@
 package com.malex.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.malex.model.entity.templ.BaseEntity;
 import com.malex.model.enums.ArticleCategory;
 
@@ -23,7 +25,8 @@ public class ArticleEntity extends BaseEntity {
     @OneToMany(mappedBy = "articleEntity", fetch = FetchType.EAGER)
     private List<ArticleBlockEntity> blockEntityList;
 
-    @OneToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
+    @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
+    @OneToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "id_image", unique = true, nullable = false)
     private ImagesEntity image;
 

@@ -12,8 +12,9 @@ public interface ArticleService {
     ArticleDTO saveDTO(ArticleDTO entity);
 
     // ArticleFindDTO
-
     List<ArticleFindDTO> findAllDTO();
+
+    ArticleDTO findByIdDTO(Long id);
 
     // ArticleEntity
     ArticleEntity save(ArticleEntity entity);

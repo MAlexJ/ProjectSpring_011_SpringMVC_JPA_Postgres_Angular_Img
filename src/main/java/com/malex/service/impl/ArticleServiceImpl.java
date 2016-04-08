@@ -38,6 +38,11 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
+    public ArticleDTO findByIdDTO(Long id) {
+        return beanMapper.map(findById(id), ArticleDTO.class);
+    }
+
+    @Override
     public ArticleEntity save(ArticleEntity entity) {
         return this.repository.saveAndFlush(entity);
     }

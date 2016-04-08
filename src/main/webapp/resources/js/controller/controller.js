@@ -86,7 +86,8 @@ myApp.controller('adminArticleController', function ($scope, $http) {
     $scope.getArticle = function (articleFormPreview) {
         if (articleFormPreview.$valid) {
             var id = this.selectArticleData;
-            $http.get('/article/' + id).success(function () {
+            $http.get('/article/' + id).success(function (data) {
+                $scope.articleWithImg = data;
             }).error(function (data, status) {
                 console.log("код ответа: " + status);
             });

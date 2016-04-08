@@ -76,3 +76,11 @@ http://tutorialzine.com/2013/08/learn-angularjs-5-examples/
 11.
 Angular.js: ng-select and ng-options
 https://dzone.com/articles/angularjs-ng-select-and-ng-0
+
+12.
+http://keenformatics.blogspot.com/2013/08/how-to-solve-json-infinite-recursion.html
+http://wiki.fasterxml.com/JacksonFeatureObjectIdentity
+    @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
+    @OneToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
+    @JoinColumn(name = "id_image", unique = true, nullable = false)
+    private ImagesEntity image;
