@@ -1,41 +1,21 @@
-package com.malex.model.entity;
+package com.malex.model.dto;
 
-import com.malex.model.entity.templ.BaseEntity;
+import com.malex.model.entity.ImagesEntity;
 import com.malex.model.enums.ArticleCategory;
 
-import javax.persistence.*;
-import java.util.List;
+import java.io.Serializable;
 
-@Entity
-@Table(name = "article")
-public class ArticleEntity extends BaseEntity {
+public class ArticleDTO implements Serializable {
 
-    @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "description", nullable = false)
     private String description;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "category", nullable = false)
     private ArticleCategory category;
 
-    @OneToMany(mappedBy = "articleEntity", fetch = FetchType.EAGER)
-    private List<ArticleBlockEntity> blockEntityList;
-
-    @OneToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
-    @JoinColumn(name = "id_image", unique = true, nullable = false)
     private ImagesEntity image;
 
-    public ArticleEntity() {
-    }
-
-    public List<ArticleBlockEntity> getBlockEntityList() {
-        return blockEntityList;
-    }
-
-    public void setBlockEntityList(List<ArticleBlockEntity> blockEntityList) {
-        this.blockEntityList = blockEntityList;
+    public ArticleDTO() {
     }
 
     public String getTitle() {
@@ -54,14 +34,6 @@ public class ArticleEntity extends BaseEntity {
         this.description = description;
     }
 
-    public ImagesEntity getImage() {
-        return image;
-    }
-
-    public void setImage(ImagesEntity image) {
-        this.image = image;
-    }
-
     public ArticleCategory getCategory() {
         return category;
     }
@@ -70,18 +42,24 @@ public class ArticleEntity extends BaseEntity {
         this.category = category;
     }
 
+    public ImagesEntity getImage() {
+        return image;
+    }
+
+    public void setImage(ImagesEntity image) {
+        this.image = image;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        ArticleEntity that = (ArticleEntity) o;
+        ArticleDTO that = (ArticleDTO) o;
 
         if (title != null ? !title.equals(that.title) : that.title != null) return false;
         if (description != null ? !description.equals(that.description) : that.description != null) return false;
         if (category != that.category) return false;
-        if (blockEntityList != null ? !blockEntityList.equals(that.blockEntityList) : that.blockEntityList != null)
-            return false;
         return image != null ? image.equals(that.image) : that.image == null;
 
     }
@@ -91,7 +69,6 @@ public class ArticleEntity extends BaseEntity {
         int result = title != null ? title.hashCode() : 0;
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (category != null ? category.hashCode() : 0);
-        result = 31 * result + (blockEntityList != null ? blockEntityList.hashCode() : 0);
         result = 31 * result + (image != null ? image.hashCode() : 0);
         return result;
     }

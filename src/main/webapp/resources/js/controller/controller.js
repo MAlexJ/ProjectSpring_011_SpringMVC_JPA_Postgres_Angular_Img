@@ -11,14 +11,14 @@ myApp.controller('articleController', function () {
 });
 
 myApp.controller('adminImageController', function ($scope, $http) {
-    
+
 
     // GET: list -> request get
     $http.get('/images').success(function (data) {
         $scope.images = data;
     }).error(function (data, status) {
         console.log("код ответа: " + status);
-    });    
+    });
 
     // POST: image -> click to button
     $scope.uploadFile = function (imgForm, imgRadio, imgFile) {
@@ -68,13 +68,31 @@ myApp.controller('adminImageController', function ($scope, $http) {
 
 myApp.controller('adminArticleController', function ($scope, $http) {
 
-    $scope.save = function (article, articleForm) {
-        if (articleForm.$valid) {
-            $http.post('/article', article).success(function () {
+    // GET: list -> request get
+    $http.get('/article').success(function (data) {
+        $scope.imgData = data;
+    }).error(function (data, status) {
+        console.log("код ответа: " + status);
+    });
+
+
+    $scope.save = function (article, eList, imgList, articleForm) {
+        if (articleForm.$valid && imgList != '') {
+            var articleCreate = {
+                title: article.title,
+                description: article.description,
+                enumType: eList,
+                imageName: imgList
+            };
+
+            $http.post('/article', articleCreate).success(function () {
                 {
                     $scope.article.title = "";
-                    $scope.article.desctiption = "";
+                    $scope.article.description = "";
                 }
+            }).success(function () {
+
+
             });
         }
     }

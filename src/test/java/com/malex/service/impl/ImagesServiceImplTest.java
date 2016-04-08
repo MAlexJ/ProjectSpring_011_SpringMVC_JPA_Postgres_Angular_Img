@@ -14,7 +14,6 @@ import org.springframework.test.context.junit4.AbstractTransactionalJUnit4Spring
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -210,5 +209,42 @@ public class ImagesServiceImplTest extends AbstractTransactionalJUnit4SpringCont
         //then
         assertNotNull(actualEntityList);
         assertEquals(3, actualEntityList.size());
+    }
+
+
+    //List<ImagesEntity> findByIsAvailableOrType(boolean isAvailable, ImageType type);
+    @Test
+    @Rollback
+    public void testFindByIsAvailableOrType() {
+        // given
+        ImagesEntity imagesEntity_01 = new ImagesEntity();
+        imagesEntity_01.setName("image1");
+        imagesEntity_01.setImg(new byte[]{4, 1, 2, 3, 4, 5, 6, 7, 8, 9});
+        imagesEntity_01.setAvailable(true);
+        imagesEntity_01.setType(ImageType.NONE);
+
+        ImagesEntity imagesEntity_02 = new ImagesEntity();
+        imagesEntity_02.setName("image2");
+        imagesEntity_02.setImg(new byte[]{57, 1, 2, 3, 4, 5, 6, 7, 8, 9});
+        imagesEntity_02.setAvailable(false);
+        imagesEntity_02.setType(ImageType.ARTICLE);
+
+        ImagesEntity imagesEntity_03 = new ImagesEntity();
+        imagesEntity_03.setName("image3");
+        imagesEntity_03.setImg(new byte[]{45, 1, 2, 3, 4, 5, 6, 7, 8, 9});
+        imagesEntity_03.setAvailable(true);
+        imagesEntity_03.setType(ImageType.ARTICLE);
+
+        imagesService.save(imagesEntity_01);
+        imagesService.save(imagesEntity_02);
+        ImagesEntity actualEntity_03 = imagesService.save(imagesEntity_03);
+
+        // when
+        List<ImagesEntity> actualEntityList = imagesService.findByIsAvailableAndType(true, ImageType.ARTICLE);
+
+        //then
+        assertNotNull(actualEntityList);
+        assertEquals(1, actualEntityList.size());
+        assertTrue(actualEntityList.contains(actualEntity_03));
     }
 }

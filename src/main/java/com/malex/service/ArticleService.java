@@ -1,10 +1,13 @@
 package com.malex.service;
 
+import com.malex.model.dto.ArticleDTO;
 import com.malex.model.entity.ArticleEntity;
 
 import java.util.List;
 
 public interface ArticleService {
+
+    ArticleDTO saveDTO(ArticleDTO entity);
 
     ArticleEntity save(ArticleEntity entity);
 

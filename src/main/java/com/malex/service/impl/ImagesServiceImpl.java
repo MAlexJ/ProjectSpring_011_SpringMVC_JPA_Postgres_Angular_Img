@@ -1,15 +1,20 @@
 package com.malex.service.impl;
 
 import com.malex.model.dto.ImagesDTO;
+import com.malex.model.dto.ImagesDataDTO;
 import com.malex.model.entity.ImagesEntity;
+import com.malex.model.enums.ArticleCategory;
+import com.malex.model.enums.ImageType;
 import com.malex.repository.ImagesRepository;
 import com.malex.service.ImagesService;
+import org.apache.commons.lang3.EnumUtils;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ImagesServiceImpl implements ImagesService {
@@ -47,6 +52,30 @@ public class ImagesServiceImpl implements ImagesService {
         return entityListDTO;
     }
 
+    @Override
+    public List<ImagesDTO> findByIsAvailableAndTypeDTO(boolean isAvailable, ImageType type) {
+        List<ImagesDTO> entityListDTO = new ArrayList<>();
+        List<ImagesEntity> entityList = repository.findByIsAvailableAndType(isAvailable, type);
+        for (ImagesEntity entity : entityList) {
+            entityListDTO.add(beanMapper.map(entity, ImagesDTO.class));
+        }
+        return entityListDTO;
+    }
+
+    @Override
+    public ImagesDataDTO findAllWithData(boolean isAvailable, ImageType type) {
+        ImagesDataDTO imagesDataDTO = new ImagesDataDTO();
+        List<String> names = findByIsAvailableAndTypeDTO(isAvailable, type).stream().map(ImagesDTO::getName).collect(Collectors.toList());
+        imagesDataDTO.setNameImg(names);
+        imagesDataDTO.setEnumList(EnumUtils.getEnumList(ArticleCategory.class));
+        return imagesDataDTO;
+    }
+
+    @Override
+    public ImagesDTO findByNameDTO(String name) {
+        ImagesEntity entity = repository.findByName(name);
+        return beanMapper.map(entity, ImagesDTO.class);
+    }
 
     @Override
     public ImagesEntity save(ImagesEntity entity) {
@@ -81,5 +110,10 @@ public class ImagesServiceImpl implements ImagesService {
     @Override
     public List<ImagesEntity> findByIsAvailable(boolean isAvailable) {
         return repository.findByIsAvailable(isAvailable);
+    }
+
+    @Override
+    public List<ImagesEntity> findByIsAvailableAndType(boolean isAvailable, ImageType type) {
+        return repository.findByIsAvailableAndType(isAvailable, type);
     }
 }

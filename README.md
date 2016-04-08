@@ -60,6 +60,11 @@ http://stackoverflow.com/questions/13783295/getting-all-names-in-an-enum-as-a-st
 Here`s an elegant solution using Apache commons-lang3:
 EnumUtils.getEnumList(State.class)
 Although it returns a List, you can convert the list easily with list.toArray()
-
 List<ArticleCategory> enumList = EnumUtils.getEnumList(ArticleCategory.class);
   ->>>> [ANGULAR_JS, JAVA_SE, JAVA_JEE, SPRING, POSTGRES, NONE]
+
+9.
+http://ru.stackoverflow.com/questions/456623/%D0%9D%D0%B0%D0%B3%D0%BB%D1%8F%D0%B4%D0%BD%D1%8B%D0%B9-%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80-%D1%80%D0%B0%D0%B7%D0%BB%D0%B8%D1%87%D0%B8%D1%8F-dto-poco-pojo-%D0%B8-value-object
+  ->>>>  ValueObject. Единица из парадигмы DDD, которой не нужен id, т.к. она немутируемая,
+т.е. не изменяется по ходу. Судя по всему, может иметь логику,
+которая не мешает ей быть немутируемой.
