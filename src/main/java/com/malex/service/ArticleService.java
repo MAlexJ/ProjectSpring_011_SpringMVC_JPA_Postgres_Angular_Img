@@ -3,6 +3,7 @@ package com.malex.service;
 import com.malex.model.dto.ArticleDTO;
 import com.malex.model.dto.ArticleFindDTO;
 import com.malex.model.entity.ArticleEntity;
+import com.malex.model.enums.ArticleCategory;
 
 import java.util.List;
 
@@ -26,5 +27,7 @@ public interface ArticleService {
     ArticleEntity findById(Long id);
 
     List<ArticleEntity> findAll();
+
+    List<ArticleEntity> findByCategory(ArticleCategory category);
 
 }

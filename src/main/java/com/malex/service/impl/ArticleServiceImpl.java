@@ -3,6 +3,7 @@ package com.malex.service.impl;
 import com.malex.model.dto.ArticleDTO;
 import com.malex.model.dto.ArticleFindDTO;
 import com.malex.model.entity.ArticleEntity;
+import com.malex.model.enums.ArticleCategory;
 import com.malex.repository.ArticleRepository;
 import com.malex.service.ArticleService;
 import org.dozer.Mapper;
@@ -65,6 +66,11 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public List<ArticleEntity> findAll() {
         return this.repository.findAll();
+    }
+
+    @Override
+    public List<ArticleEntity> findByCategory(ArticleCategory category) {
+        return this.repository.findByCategory(category);
     }
 
 }

@@ -107,7 +107,7 @@ public class ArticleServiceImplTest extends AbstractTransactionalJUnit4SpringCon
     }
 
 
-    // Test 1: ArticleEntity update(ArticleEntity entity);
+    // 4. Test 1: ArticleEntity update(ArticleEntity entity);
 
     /**
      * Update ArticleEntity without update ImageEntity.
@@ -138,7 +138,7 @@ public class ArticleServiceImplTest extends AbstractTransactionalJUnit4SpringCon
 
     }
 
-    // Test 2: ArticleEntity update(ArticleEntity entity);
+    // 5. Test 2: ArticleEntity update(ArticleEntity entity);
 
     /**
      * Update ArticleEntity with update ImageEntity.
@@ -174,7 +174,7 @@ public class ArticleServiceImplTest extends AbstractTransactionalJUnit4SpringCon
     }
 
 
-    // Test 1: void delete(Long id);
+    // 6. Test 1: void delete(Long id);
     @Test
     @Rollback
     public void testDelete() {
@@ -206,7 +206,7 @@ public class ArticleServiceImplTest extends AbstractTransactionalJUnit4SpringCon
 
     }
 
-    // Test 1: ArticleEntity findById(Long id);
+    // 7. Test 1: ArticleEntity findById(Long id);
 
     /**
      * Find ArticleEntity without equals Image
@@ -234,7 +234,7 @@ public class ArticleServiceImplTest extends AbstractTransactionalJUnit4SpringCon
         assertEquals(expectArticleEntity, actualArticleEntity);
     }
 
-    // Test 1: ArticleEntity findById(Long id);
+    // 8. Test 1: ArticleEntity findById(Long id);
 
     /**
      * Find ArticleEntity with equals ImageEntity
@@ -264,7 +264,7 @@ public class ArticleServiceImplTest extends AbstractTransactionalJUnit4SpringCon
         assertEquals(expectArticleEntity, actualArticleEntity);
     }
 
-    // List<ArticleEntity> findAll();
+    // 9. List<ArticleEntity> findAll();
     @Test
     @Rollback
     public void testFindAll() {
@@ -291,10 +291,11 @@ public class ArticleServiceImplTest extends AbstractTransactionalJUnit4SpringCon
         assertEquals(expectArticleEntityList, actualArticleEntityList);
     }
 
-    // public List<ArticleFindDTO> findAllDTO()
+    // 10. public List<ArticleFindDTO> findAllDTO()
     @Test
     @Rollback
     public void testFindAllDTO() {
+        // given
         for (int i = 0; i < 2; i++) {
             ArticleEntity entity = new ArticleEntity();
             entity.setTitle("Title");
@@ -315,4 +316,30 @@ public class ArticleServiceImplTest extends AbstractTransactionalJUnit4SpringCon
         assertNotNull(allDTO);
         assertEquals(2, allDTO.size());
     }
+
+    // 11. List<ArticleEntity> findByCategory(ArticleCategory category);
+    @Test
+    @Rollback
+    public void testFindByCategory() {
+        // given
+        for (int i = 0; i < 5; i++) {
+            ArticleEntity entity = new ArticleEntity();
+            entity.setTitle("Title");
+            entity.setDescription("Descr");
+            entity.setCategory((i % 2 == 0) ? ArticleCategory.JAVA_SE : ArticleCategory.NONE);
+
+            ImagesEntity img = ImagesEntityUtil.getImagesEntity();
+            img.setName("ManeImg" + i);
+            ImagesEntity expectImagesEntity = imagesService.save(img);
+            entity.setImage(expectImagesEntity);
+            articleService.save(entity);
+        }
+        // when
+        List<ArticleEntity> actualListByCategory = articleService.findByCategory(ArticleCategory.JAVA_SE);
+
+        //then
+        assertNotNull(actualListByCategory);
+        assertEquals(3, actualListByCategory.size());
+    }
+
 }

@@ -6,7 +6,14 @@ myApp.controller('homeController', function () {
 });
 
 
-myApp.controller('articleController', function () {
+myApp.controller('articleController', function ($scope, $http) {
+
+    // GET: list articleJavaSE -> request get
+    $http.get('/articleJavaSE').success(function (data) {
+        $scope.articleJavaSE = data;
+    }).error(function (data, status) {
+        console.log("код ответа: " + status);
+    });
 
 });
 
