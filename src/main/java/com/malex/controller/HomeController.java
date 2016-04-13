@@ -33,4 +33,10 @@ public class HomeController {
         return "views/adminArticle";
     }
 
+    @RequestMapping(path = "/articleView", method = RequestMethod.GET)
+    public String getArticleView() {
+        return "views/articleView";
+    }
+
+
 }

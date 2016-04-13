@@ -28,6 +28,14 @@ var myApp = angular.module('myApp', ["ngRoute"]).config(function ($routeProvider
             controller: 'adminArticleController'
         });
 
+
+    $routeProvider.when('/articleView/:category?/:id?',
+        {
+            templateUrl: 'articleView.html',
+            controller: 'articleViewController'
+        });
+
+
     $routeProvider.otherwise({redirectTo: '/home'});
 
 });

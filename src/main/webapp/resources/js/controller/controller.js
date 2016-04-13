@@ -5,6 +5,10 @@ myApp.controller('homeController', function () {
 
 });
 
+myApp.controller('articleViewController', function () {
+
+});
+
 
 myApp.controller('articleController', function ($scope, $http) {
 
@@ -14,6 +18,15 @@ myApp.controller('articleController', function ($scope, $http) {
     }).error(function (data, status) {
         console.log("код ответа: " + status);
     });
+
+    $scope.getArticleView = function (category, id) {
+        if(id>0 && category!=''){
+            console.log("category: " + category);
+            console.log("id: " + id);
+            $http.get('/articleView/'+category+'/'+id);
+
+        }
+    }
 
 });
 

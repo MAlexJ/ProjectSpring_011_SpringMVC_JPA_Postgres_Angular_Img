@@ -14,7 +14,8 @@
                     </div>
                     <div class="card-content">
                         <span style="font-size: 12pt" class="card-title activator grey-text text-darken-4"><strong>{{artJSE.title}}</strong><i class="material-icons right">more_vert</i></span>
-                        <p><a href="#/articleJavaSE/{{artJSE.id}}">This is a link</a></p>
+                        <!--<p><a href="#/articleView/{{artJSE.category}}/{{artJSE.id}}">Read</a></p>-->
+                        <p><a class="btn" href="#/articleView"  ng-click="getArticleView(artJSE.category, artJSE.id)">Read</a></p>
                     </div>
                     <div class="card-reveal">
                         <span style="font-size: 12pt" class="card-title grey-text text-darken-4"><strong>{{artJSE.title}}</strong><i class="material-icons right">close</i></span>
