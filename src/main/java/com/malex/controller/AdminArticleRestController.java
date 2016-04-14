@@ -19,7 +19,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import java.util.List;
 
 @RestController
-public class ArticleAdminRestController {
+public class AdminArticleRestController {
 
     @Autowired
     private ImagesService imagesService;

@@ -326,7 +326,7 @@ public class ArticleServiceImplTest extends AbstractTransactionalJUnit4SpringCon
             ArticleEntity entity = new ArticleEntity();
             entity.setTitle("Title");
             entity.setDescription("Descr");
-            entity.setCategory((i % 2 == 0) ? ArticleCategory.JAVA_SE : ArticleCategory.NONE);
+            entity.setCategory((i % 2 == 0) ? ArticleCategory.JAVA : ArticleCategory.NONE);
 
             ImagesEntity img = ImagesEntityUtil.getImagesEntity();
             img.setName("ManeImg" + i);
@@ -335,7 +335,7 @@ public class ArticleServiceImplTest extends AbstractTransactionalJUnit4SpringCon
             articleService.save(entity);
         }
         // when
-        List<ArticleEntity> actualListByCategory = articleService.findByCategory(ArticleCategory.JAVA_SE);
+        List<ArticleEntity> actualListByCategory = articleService.findByCategory(ArticleCategory.JAVA);
 
         //then
         assertNotNull(actualListByCategory);

@@ -84,3 +84,23 @@ http://wiki.fasterxml.com/JacksonFeatureObjectIdentity
     @OneToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "id_image", unique = true, nullable = false)
     private ImagesEntity image;
+
+
+13.
+http://tutorials.jenkov.com/angularjs/routes.html
+AngularJS routes enables you to show different content
+depending on what route is chosen.
+A route is specified in the URL after the # sign.
+Thus, the following URL's all point to the same AngularJS application,
+but each point to different routes:
+
+// route1
+ when('/route1/:param',
+ {    templateUrl: 'angular-route-template-1.jsp',
+      controller: 'RouteController'
+ }).
+
+// controller
+ module.controller("RouteController", function($scope, $routeParams) {
+     $scope.param = $routeParams.param;
+ })

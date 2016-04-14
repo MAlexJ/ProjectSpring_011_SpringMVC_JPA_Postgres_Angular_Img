@@ -1,23 +1,23 @@
 'use strict';
 
+// ************  Home Page  ******************
 
-myApp.controller('homeController', function () {
-
-});
-
-myApp.controller('articleViewController', function () {
-
-});
-
-
-myApp.controller('articleController', function ($scope, $http) {
-
-    // GET: list articleJavaSE -> request get
-    $http.get('/articleJavaSE').success(function (data) {
-        $scope.articleJavaSE = data;
+myApp.controller('homeController', function ($scope, $http) {
+    
+    
+    // GET: category list
+    $http.get('/homeGetListCategory').success(function (data) {
+        $scope.categoryLesson = data;       
     }).error(function (data, status) {
         console.log("код ответа: " + status);
     });
+
+    // // GET: list java -> request get
+    // $http.get('/homeListLessonJava').success(function (data) {
+    //     $scope.listLessonJava = data;
+    // }).error(function (data, status) {
+    //     console.log("код ответа: " + status);
+    // });
 
     $scope.getArticleView = function (category, id) {
         if(id>0 && category!=''){
@@ -27,8 +27,32 @@ myApp.controller('articleController', function ($scope, $http) {
 
         }
     }
+});
+
+// ************ Lesson Page ******************
+
+myApp.controller('angularController', function () {
 
 });
+
+myApp.controller('javaController', function () {
+
+});
+
+myApp.controller('springController', function () {
+
+});
+
+myApp.controller('infoController', function () {
+
+});
+
+myApp.controller('postgresController', function () {
+
+});
+
+
+// ************  Admin Page ******************
 
 myApp.controller('adminImageController', function ($scope, $http) {
 
