@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
         <div class="col s12"> <h5>Postgres SQL PAGE</h5> </div>
-        <div class="col s2">
+        <div class="col s12 m3 l3">
             <ol>
                 <li>Postgres</li>
                 <li>Postgres</li>
@@ -9,8 +9,20 @@
                 <li>Postgres</li>
             </ol>
         </div>
-        <div class="col s10">
-            <h5> Text Page</h5>
+        <div class="col s12 m9 l9">
+            <div class="row">
+                <div class="col s12 m3 l3">
+                    <div class="card">
+                        <div class="card-image">
+                            <img class="activator" data-ng-src="{{'data:image/png;base64,'+lessonPostgres.image.img}}"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 m9 l9">
+                    <p>title: {{lessonPostgres.title}}</p>
+                    <p>description: {{lessonPostgres.description}}</p>
+                </div>
+            </div>
         </div>
     </div>
 </div>

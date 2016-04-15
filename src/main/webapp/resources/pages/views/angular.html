@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row">
-        <div class="col s12"> <h5>Angular JS PAGE</h5> </div>
+        <div class="col s12"><h5>Angular JS PAGE</h5></div>
         <div class="col s2">
             <ol>
                 <li>Angular</li>
@@ -10,7 +10,19 @@
             </ol>
         </div>
         <div class="col s10">
-            <h5> Text Page</h5>
+            <div class="row">
+                <div class="col s3">
+                    <div class="card">
+                        <div class="card-image">
+                            <img class="activator" data-ng-src="{{'data:image/png;base64,'+lessonAngular.image.img}}"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s9">
+                    <p>title: {{lessonAngular.title}}</p>
+                    <p>description: {{lessonAngular.description}}</p>
+                </div>
+            </div>
         </div>
     </div>
 </div>

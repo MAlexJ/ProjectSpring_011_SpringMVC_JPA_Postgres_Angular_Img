@@ -104,3 +104,17 @@ but each point to different routes:
  module.controller("RouteController", function($scope, $routeParams) {
      $scope.param = $routeParams.param;
  })
+
+14.
+http://stepansuvorov.com/blog/2014/09/angularjs-data-transfer/
+myApp.service('currentLesson', function () {
+    var _lesson = {};
+    return {
+        setLesson: function (lesson) {
+            _lesson = lesson;
+        },
+        getLesson: function () {
+            return _lesson;
+        }
+    }
+});

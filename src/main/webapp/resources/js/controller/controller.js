@@ -2,52 +2,114 @@
 
 // ************  Home Page  ******************
 
-myApp.controller('homeController', function ($scope, $http) {
-    
-    
-    // GET: category list
+myApp.controller('homeController', function ($scope, $http, currentLesson) {
+
+    // GET: list category -> request get
     $http.get('/homeGetListCategory').success(function (data) {
-        $scope.categoryLesson = data;       
+        $scope.categoryLesson = data;
     }).error(function (data, status) {
         console.log("код ответа: " + status);
     });
 
-    // // GET: list java -> request get
-    // $http.get('/homeListLessonJava').success(function (data) {
-    //     $scope.listLessonJava = data;
-    // }).error(function (data, status) {
-    //     console.log("код ответа: " + status);
-    // });
+    // GET: list angular -> request get
+    $http.get('/homeListLesson/' + 'ANGULAR').success(function (data) {
+        $scope.listLessonAngular = data;
+    }).error(function (data, status) {
+        console.log("код ответа: " + status);
+    });
 
-    $scope.getArticleView = function (category, id) {
-        if(id>0 && category!=''){
-            console.log("category: " + category);
-            console.log("id: " + id);
-            $http.get('/articleView/'+category+'/'+id);
+    // GET: list java -> request get
+    $http.get('/homeListLesson/' + 'JAVA').success(function (data) {
+        $scope.listLessonJava = data;
+    }).error(function (data, status) {
+        console.log("код ответа: " + status);
+    });
 
+    // GET: list spring -> request get
+    $http.get('/homeListLesson/' + 'SPRING').success(function (data) {
+        $scope.listLessonSpring = data;
+    }).error(function (data, status) {
+        console.log("код ответа: " + status);
+    });
+
+    // GET: list postgres -> request get
+    $http.get('/homeListLesson/' + 'POSTGRES').success(function (data) {
+        $scope.listLessonPostgres = data;
+    }).error(function (data, status) {
+        console.log("код ответа: " + status);
+    });
+
+    $scope.homeGetLesson = function (category, id) {
+        if (id > 0 && category == 'ANGULAR') {
+            currentLesson.setLessonCatId_Angular(category, id);
+        }
+        if (id > 0 && category == 'JAVA') {
+            currentLesson.setLessonCatId_Java(category, id);
+        }
+        if (id > 0 && category == 'SPRING') {
+            currentLesson.setLessonCatId_Spring(category, id);
+        }
+        if (id > 0 && category == 'POSTGRES') {
+            currentLesson.setLessonCatId_Postgres(category, id);
         }
     }
 });
 
 // ************ Lesson Page ******************
 
-myApp.controller('angularController', function () {
+myApp.controller('angularController', function ($scope, $http, currentLesson) {
+    var lessonId = currentLesson.getLessonId_Angular();
+    var lessonCat = currentLesson.getLessonCat_Angular();
 
+    if (lessonId > 0 && lessonCat != '') {
+        $http.get('/homeLesson/' + lessonCat + '/' + lessonId).success(function (data) {
+            $scope.lessonAngular = data;
+        }).error(function (data, status) {
+            console.log("код ответа: " + status);
+        });
+    }
 });
 
-myApp.controller('javaController', function () {
+myApp.controller('javaController', function ($scope, $http, currentLesson) {
+    var lessonId = currentLesson.getLessonId_Java();
+    var lessonCat = currentLesson.getLessonCat_Java();
 
+    if (lessonId > 0 && lessonCat != '') {
+        $http.get('/homeLesson/' + lessonCat + '/' + lessonId).success(function (data) {
+            $scope.lessonJava = data;
+        }).error(function (data, status) {
+            console.log("код ответа: " + status);
+        });
+    }
 });
 
-myApp.controller('springController', function () {
+myApp.controller('springController', function ($scope, $http, currentLesson) {
+    var lessonId = currentLesson.getLessonId_Spring();
+    var lessonCat = currentLesson.getLessonCat_Spring();
 
+    if (lessonId > 0 && lessonCat != '') {
+        $http.get('/homeLesson/' + lessonCat + '/' + lessonId).success(function (data) {
+            $scope.lessonSpring = data;
+        }).error(function (data, status) {
+            console.log("код ответа: " + status);
+        });
+    }
 });
 
-myApp.controller('infoController', function () {
+myApp.controller('postgresController', function ($scope, $http, currentLesson) {
+    var lessonId = currentLesson.getLessonId_Postgres();
+    var lessonCat = currentLesson.getLessonCat_Postgres();
 
+    if (lessonId > 0 && lessonCat != '') {
+        $http.get('/homeLesson/' + lessonCat + '/' + lessonId).success(function (data) {
+            $scope.lessonPostgres = data;
+        }).error(function (data, status) {
+            console.log("код ответа: " + status);
+        });
+    }
 });
 
-myApp.controller('postgresController', function () {
+myApp.controller('infoController', function ($scope, $http, currentLesson) {
 
 });
 
@@ -74,13 +136,15 @@ myApp.controller('adminImageController', function ($scope, $http) {
                 transformRequest: angular.identity,
                 headers: {'Content-Type': undefined}
             }).success(function () {
-
+                Materialize.toast('The image is added to the database', 3000, 'rounded')
                 // repeat: get list
                 $http.get('/images').success(function (data) {
                     $scope.images = data;
                 }).error(function (data, status) {
                     console.log("код ответа: " + status);
                 });
+            }).error(function () {
+                Materialize.toast('The image is not added in the database!!!', 3000, '')
             });
             this.imgRadio.radio = 'NONE';
             this.imgRadio.name = false;

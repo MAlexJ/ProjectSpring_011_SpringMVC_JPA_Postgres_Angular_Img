@@ -71,7 +71,7 @@ public class ArticleServiceImplTest extends AbstractTransactionalJUnit4SpringCon
         ArticleEntity expectArticleEntity = new ArticleEntity();
         expectArticleEntity.setTitle("Title");
         expectArticleEntity.setDescription("Descr");
-        expectArticleEntity.setCategory(ArticleCategory.ANGULAR_JS);
+        expectArticleEntity.setCategory(ArticleCategory.ANGULAR);
         expectArticleEntity.setImage(ImagesEntityUtil.getImagesEntity());
 
         // when
@@ -94,7 +94,7 @@ public class ArticleServiceImplTest extends AbstractTransactionalJUnit4SpringCon
         ArticleEntity expectArticleEntity = new ArticleEntity();
         expectArticleEntity.setTitle("Title");
         expectArticleEntity.setDescription("Descr");
-        expectArticleEntity.setCategory(ArticleCategory.ANGULAR_JS);
+        expectArticleEntity.setCategory(ArticleCategory.ANGULAR);
         ImagesEntity imagesEntity = imagesService.save(ImagesEntityUtil.getImagesEntity());
         expectArticleEntity.setImage(imagesEntity);
 
@@ -300,7 +300,7 @@ public class ArticleServiceImplTest extends AbstractTransactionalJUnit4SpringCon
             ArticleEntity entity = new ArticleEntity();
             entity.setTitle("Title");
             entity.setDescription("Descr");
-            entity.setCategory(ArticleCategory.ANGULAR_JS);
+            entity.setCategory(ArticleCategory.ANGULAR);
 
             ImagesEntity img = ImagesEntityUtil.getImagesEntity();
             img.setName("ManeImg" + i);

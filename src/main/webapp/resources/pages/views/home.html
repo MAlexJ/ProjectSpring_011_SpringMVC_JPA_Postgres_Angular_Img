@@ -76,5 +76,79 @@
         </div>
     </div>
 
+    <!-- Spring -->
+    <div>
+        <div class="row">
+            <h4>Spring</h4>
+            <div class="col s12 m12 l4" ng-repeat="listSpring in listLessonSpring">
+                <div class="card small hoverable">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img class="activator" data-ng-src="{{'data:image/png;base64,'+listSpring.image.img}}"/>
+                    </div>
+                    <div class="card-content">
+                        <span style="font-size: 12pt" class="card-title activator grey-text text-darken-4"><strong>{{listSpring.title}}</strong><i
+                                class="material-icons right">more_vert</i></span>
+                        <!--<p><a href="#/articleView/{{artJSE.category}}/{{artJSE.id}}">Read</a></p>-->
+                        <p><a class="btn" href="#/spring" ng-click="homeGetLesson(listSpring.category, listSpring.id)">Read</a>
+                        </p>
+                    </div>
+                    <div class="card-reveal">
+                        <span style="font-size: 12pt" class="card-title grey-text text-darken-4"><strong>{{listSpring.title}}</strong><i
+                                class="material-icons right">close</i></span>
+                        <p>{{listSpring.description}}</p>
+                    </div>
+                </div>
+            </div>
 
+            <div class="col s12 m12 l12 center-align">
+                <ul class="pagination">
+                    <li class="disabled"><a href="#!"><i class="material-icons"></i></a></li>
+                    <li class="active"><a href="#!">1</a></li>
+                    <li class="waves-effect"><a href="#!">2</a></li>
+                    <li class="waves-effect"><a href="#!">3</a></li>
+                    <li class="waves-effect"><a href="#!">4</a></li>
+                    <li class="waves-effect"><a href="#!">5</a></li>
+                    <li class="waves-effect"><a href="#!"><i class="material-icons"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Postgres -->
+    <div>
+        <div class="row">
+            <h4>PostgreSQL</h4>
+            <div class="col s12 m12 l4" ng-repeat="listPostgres in listLessonPostgres">
+                <div class="card small hoverable">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img class="activator" data-ng-src="{{'data:image/png;base64,'+listPostgres.image.img}}"/>
+                    </div>
+                    <div class="card-content">
+                        <span style="font-size: 12pt" class="card-title activator grey-text text-darken-4"><strong>{{listPostgres.title}}</strong><i
+                                class="material-icons right">more_vert</i></span>
+                        <!--<p><a href="#/articleView/{{artJSE.category}}/{{artJSE.id}}">Read</a></p>-->
+                        <p><a class="btn" href="#/postgres" ng-click="homeGetLesson(listPostgres.category, listPostgres.id)">Read</a>
+                        </p>
+                    </div>
+                    <div class="card-reveal">
+                        <span style="font-size: 12pt" class="card-title grey-text text-darken-4"><strong>{{listPostgres.title}}</strong><i
+                                class="material-icons right">close</i></span>
+                        <p>{{listPostgres.description}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col s12 m12 l12 center-align">
+                <ul class="pagination">
+                    <li class="disabled"><a href="#!"><i class="material-icons"></i></a></li>
+                    <li class="active"><a href="#!">1</a></li>
+                    <li class="waves-effect"><a href="#!">2</a></li>
+                    <li class="waves-effect"><a href="#!">3</a></li>
+                    <li class="waves-effect"><a href="#!">4</a></li>
+                    <li class="waves-effect"><a href="#!">5</a></li>
+                    <li class="waves-effect"><a href="#!"><i class="material-icons"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>

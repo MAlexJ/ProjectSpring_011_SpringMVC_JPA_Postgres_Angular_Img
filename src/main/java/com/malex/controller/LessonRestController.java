@@ -18,15 +18,26 @@ public class LessonRestController {
 
     @RequestMapping(path = "/homeGetListCategory", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<ArticleCategory> homePage_Category_GET(){
+    public List<ArticleCategory> homePage_Category_GET() {
         return EnumUtils.getEnumList(ArticleCategory.class);
     }
 
     @RequestMapping(path = "/homeListLesson/{category}", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public List<ArticleEntity> articleJavaSeGET(@PathVariable ArticleCategory category) {
+    public List<ArticleEntity> homePage_ListLesson_GET(@PathVariable ArticleCategory category) {
         System.err.println(category);
         return articleService.findByCategory(category);
     }
+
+    @RequestMapping(path = "/homeLesson/{category}/{id}", method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ArticleEntity homePage_Lesson_GET(@PathVariable ArticleCategory category,
+                                                   @PathVariable Long id) {
+        System.err.println(id);
+        System.err.println(category);
+        return articleService.findById(id);
+    }
+
 }
