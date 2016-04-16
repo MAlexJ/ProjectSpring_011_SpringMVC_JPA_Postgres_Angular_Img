@@ -118,3 +118,7 @@ myApp.service('currentLesson', function () {
         }
     }
 });
+
+15.
+http://stackoverflow.com/questions/9944137/have-jpa-hibernate-to-replicate-the-on-delete-set-null-functionality
+Have JPA/Hibernate to replicate the “ON DELETE SET NULL” functionality

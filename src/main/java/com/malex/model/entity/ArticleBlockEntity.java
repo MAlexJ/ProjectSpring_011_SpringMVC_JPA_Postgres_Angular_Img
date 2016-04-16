@@ -16,7 +16,7 @@ public class ArticleBlockEntity extends BaseEntity {
     @OneToOne(mappedBy = "block")
     private ArticleEntity articleEntity;
 
-    @OneToMany(mappedBy = "block")
+    @OneToMany(mappedBy = "block", cascade=CascadeType.ALL, orphanRemoval=true)
     private List<ImagesEntity> images;
 
     public ArticleBlockEntity() {

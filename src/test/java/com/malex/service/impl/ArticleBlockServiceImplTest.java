@@ -17,15 +17,16 @@ import org.springframework.test.context.junit4.AbstractTransactionalJUnit4Spring
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.assertNotNull;
-import static junit.framework.TestCase.assertNull;
+import java.util.ArrayList;
+import java.util.List;
+
+import static junit.framework.TestCase.*;
 
 @ActiveProfiles("test")
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(classes = {AppConfigTest.class})
-public class ArticleBlockServiceImplTest  extends AbstractTransactionalJUnit4SpringContextTests {
+public class ArticleBlockServiceImplTest extends AbstractTransactionalJUnit4SpringContextTests {
 
     @Autowired
     private ArticleBlockService articleBlockService;
@@ -50,7 +51,7 @@ public class ArticleBlockServiceImplTest  extends AbstractTransactionalJUnit4Spr
 
         //then
         assertNotNull(actualEntity);
-        assertEquals(entity,actualEntity);
+        assertEquals(entity, actualEntity);
     }
 
     // 2. Test:  ArticleBlockEntity save(ArticleBlockEntity entity);
@@ -73,11 +74,11 @@ public class ArticleBlockServiceImplTest  extends AbstractTransactionalJUnit4Spr
 
         //then
         assertNotNull(actualEntity);
-        assertEquals(entity,actualEntity);
-        assertEquals(entity,image.getBlock());
+        assertEquals(entity, actualEntity);
+        assertEquals(entity, image.getBlock());
     }
 
-    // 2. Test:  ArticleBlockEntity save(ArticleBlockEntity entity);
+    // 3. Test:  ArticleBlockEntity save(ArticleBlockEntity entity);
 
     /**
      * Create ArticleBlockEntity with ImageEntity it is possible.
@@ -118,12 +119,169 @@ public class ArticleBlockServiceImplTest  extends AbstractTransactionalJUnit4Spr
 
         //then
         assertNotNull(actualEntity);
-        assertEquals(entity,actualEntity);
-        assertEquals(entity,image_01.getBlock());
-        assertEquals(entity,image_02.getBlock());
-        assertEquals(entity,image_03.getBlock());
+        assertEquals(entity, actualEntity);
+        assertEquals(entity, image_01.getBlock());
+        assertEquals(entity, image_02.getBlock());
+        assertEquals(entity, image_03.getBlock());
 
         assertNull(actualEntity.getImages());
+    }
+
+    // 4. Test 1: ArticleBlockEntity update(ArticleBlockEntity entity);
+
+    /**
+     * Update ArticleBlockEntity without update ImageEntity.
+     */
+    @Test
+    @Rollback
+    public void testUpdate_1() {
+        // given
+        ArticleBlockEntity entity = new ArticleBlockEntity();
+        entity.setText("lalalalalalal");
+        ArticleBlockEntity e = articleBlockService.save(entity);
+
+        // when
+        ArticleBlockEntity actualEntity = articleBlockService.findById(e.getId());
+        actualEntity.setText("AFAF");
+        ArticleBlockEntity expectEntity = articleBlockService.update(actualEntity);
+
+        //then
+        assertNotNull(expectEntity);
+        assertEquals(actualEntity, expectEntity);
+        assertEquals(actualEntity.getId(), expectEntity.getId());
+    }
+
+    // 5. Test 1: ArticleBlockEntity update(ArticleBlockEntity entity);
+
+    /**
+     * Update ArticleBlockEntity wit update ImageEntity.
+     */
+    @Test
+    @Rollback
+    public void testUpdate_2() {
+        // given
+        ArticleBlockEntity entity = new ArticleBlockEntity();
+        entity.setText("lalalalalalal");
+        ArticleBlockEntity e = articleBlockService.save(entity);
+
+        ImagesEntity imagesEntity_01 = new ImagesEntity();
+        imagesEntity_01.setName("image1");
+        imagesEntity_01.setImg(new byte[]{0, 11, 2, 3, 4, 5, 6, 7, 8, 9});
+        imagesEntity_01.setAvailable(true);
+        imagesEntity_01.setType(ImageType.NONE);
+        imagesEntity_01.setBlock(entity);
+        ImagesEntity image_01 = imagesService.save(imagesEntity_01);
+
+        // when
+        ArticleBlockEntity actualEntity = articleBlockService.findById(e.getId());
+        actualEntity.setText("AFAF");
+        ArticleBlockEntity expectEntity = articleBlockService.update(actualEntity);
+
+        //then
+        assertNotNull(expectEntity);
+        assertEquals(actualEntity, expectEntity);
+        assertEquals(actualEntity.getId(), expectEntity.getId());
+        assertEquals(expectEntity, image_01.getBlock());
+    }
+
+    // 6. Test 1: void delete(Long id);
+
+    /**
+     * Delete ArticleBlockEntity without update ImageEntity.
+     */
+    @Test
+    @Rollback
+    public void testDelete_1() {
+        // given
+        ArticleBlockEntity entity = new ArticleBlockEntity();
+        entity.setText("lalalalalalal");
+        ArticleBlockEntity articleBlockEntity = articleBlockService.save(entity);
+
+        // when
+        articleBlockService.delete(articleBlockEntity.getId());
+        List<ArticleBlockEntity> entityList = articleBlockService.findAll();
+
+        //then
+        assertTrue(entityList.isEmpty());
+    }
+
+    // 7. Test 1: void delete(Long id);
+
+    /**
+     * Delete ArticleBlockEntity wit update ImageEntity.
+     */
+    @Test
+    @Rollback
+    public void testDelete_2() {
+        // given
+        ArticleBlockEntity entity = new ArticleBlockEntity();
+        entity.setText("lalalalalalal");
+        ArticleBlockEntity articleBlockEntity = articleBlockService.save(entity);
+
+        ImagesEntity imagesEntity_01 = new ImagesEntity();
+        imagesEntity_01.setName("image1");
+        imagesEntity_01.setImg(new byte[]{0, 11, 2, 3, 4, 5, 6, 7, 8, 9});
+        imagesEntity_01.setAvailable(true);
+        imagesEntity_01.setType(ImageType.NONE);
+        imagesEntity_01.setBlock(entity);
+        imagesService.save(imagesEntity_01);
+
+        // when
+        articleBlockService.delete(articleBlockEntity.getId());
+        List<ArticleBlockEntity> entityList = articleBlockService.findAll();
+        List<ImagesEntity> imagesEntityList = imagesService.findAll();
+
+        //then
+        assertTrue(entityList.isEmpty());
+        assertTrue(!imagesEntityList.isEmpty());
+        assertEquals(imagesEntityList.size(), 1);
+    }
+
+    // 8. Test 1: ArticleEntity findById(Long id);
+
+    /**
+     * Find ArticleBlockEntity without equals Image
+     */
+    @Test
+    @Rollback
+    public void testFindById() {
+        // given
+        ArticleBlockEntity entity = new ArticleBlockEntity();
+        entity.setText("lalalalalalal");
+        ArticleBlockEntity articleBlockEntity = articleBlockService.save(entity);
+
+        // when
+        ArticleBlockEntity actualEntity = articleBlockService.findById(articleBlockEntity.getId());
+
+        //then
+        assertNotNull(actualEntity);
+        assertEquals(entity, actualEntity);
+
+    }
+
+    // 8. Test 1: ArticleEntity findById(Long id);
+
+    /**
+     * FindAll ArticleBlockEntity without equals Image
+     */
+    @Test
+    @Rollback
+    public void testFindAll() {
+        // given
+        List<ArticleBlockEntity> entityList = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            ArticleBlockEntity entity = new ArticleBlockEntity();
+            entity.setText("lalalalalalal__" + i);
+            entityList.add(articleBlockService.save(entity));
+        }
+
+        // when
+        List<ArticleBlockEntity> all = articleBlockService.findAll();
+
+        //then
+        assertNotNull(all);
+        assertEquals(entityList, all);
+
     }
 
 }
