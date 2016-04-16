@@ -29,6 +29,10 @@ public class ImagesEntity extends BaseEntity {
     @OneToOne(mappedBy = "image")
     private ArticleEntity article;
 
+    @ManyToOne
+    @JoinColumn(name = "block_id")
+    private ArticleBlockEntity block;
+
     public ImagesEntity() {
     }
 
@@ -72,6 +76,14 @@ public class ImagesEntity extends BaseEntity {
         this.article = article;
     }
 
+    public ArticleBlockEntity getBlock() {
+        return block;
+    }
+
+    public void setBlock(ArticleBlockEntity block) {
+        this.block = block;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -83,7 +95,8 @@ public class ImagesEntity extends BaseEntity {
         if (name != null ? !name.equals(entity.name) : entity.name != null) return false;
         if (!Arrays.equals(img, entity.img)) return false;
         if (type != entity.type) return false;
-        return article != null ? article.equals(entity.article) : entity.article == null;
+        if (article != null ? !article.equals(entity.article) : entity.article != null) return false;
+        return block != null ? block.equals(entity.block) : entity.block == null;
 
     }
 
@@ -94,6 +107,7 @@ public class ImagesEntity extends BaseEntity {
         result = 31 * result + (isAvailable ? 1 : 0);
         result = 31 * result + (type != null ? type.hashCode() : 0);
         result = 31 * result + (article != null ? article.hashCode() : 0);
+        result = 31 * result + (block != null ? block.hashCode() : 0);
         return result;
     }
 }
