@@ -57,11 +57,11 @@ var myApp = angular.module('myApp', ["ngRoute"]).config(function ($routeProvider
             controller: 'adminArticleController'
         });
 
-    // $routeProvider.when('/articleView/:category?/:id?',
-    //     {
-    //         templateUrl: 'articleView22.html',
-    //         controller: 'articleViewController'
-    //     });
+     $routeProvider.when('/adminBlock',
+        {
+            templateUrl: 'adminBlock.html',
+            controller: 'adminBlockController'
+        });    
 
     $routeProvider.otherwise({redirectTo: '/home'});
 

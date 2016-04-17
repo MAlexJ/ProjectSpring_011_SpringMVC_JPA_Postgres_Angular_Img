@@ -11,7 +11,7 @@ public class HomeController {
     // ************  Home Page  ******************
 
     @RequestMapping(method = RequestMethod.GET)
-    public String indexPage_GET(){
+    public String indexPage_GET() {
         return "index";
     }
 
@@ -58,6 +58,11 @@ public class HomeController {
     @RequestMapping(path = "/adminArticle", method = RequestMethod.GET)
     public String adminArticlePage_GET() {
         return "views/adminArticle";
+    }
+
+    @RequestMapping(path = "/adminBlock", method = RequestMethod.GET)
+    public String adminBlockPage_GET() {
+        return "views/adminBlock";
     }
 
 }

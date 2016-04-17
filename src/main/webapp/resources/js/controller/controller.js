@@ -238,3 +238,7 @@ myApp.controller('adminArticleController', function ($scope, $http) {
     }
 
 });
+
+myApp.controller('adminBlockController', function ($scope, $http) {
+    
+});
