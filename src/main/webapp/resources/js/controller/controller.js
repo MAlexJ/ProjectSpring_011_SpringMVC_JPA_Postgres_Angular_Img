@@ -177,7 +177,7 @@ myApp.controller('adminImageController', function ($scope, $http) {
 myApp.controller('adminArticleController', function ($scope, $http) {
 
     // GET: list -> request get
-    $http.get('/article').success(function (data) {
+    $http.get('/articleImageType/ARTICLE').success(function (data) {
         $scope.imgData = data;
     }).error(function (data, status) {
         console.log("код ответа: " + status);
@@ -220,7 +220,7 @@ myApp.controller('adminArticleController', function ($scope, $http) {
             }).success(function () {
 
                 // GET: list article -> request get
-                $http.get('/article').success(function (data) {
+                $http.get('/articleImageType/ARTICLE').success(function (data) {
                     $scope.imgData = data;
                 }).error(function (data, status) {
                     console.log("код ответа: " + status);
@@ -240,5 +240,30 @@ myApp.controller('adminArticleController', function ($scope, $http) {
 });
 
 myApp.controller('adminBlockController', function ($scope, $http) {
-    
+
+    // GET: list -> request get
+    $http.get('/category').success(function (data) {
+        $scope.articleData = data;
+    }).error(function (data, status) {
+        console.log("код ответа: " + status);
+    });
+
+    // GET: list -> request get
+    $http.get('/articleImageType/BLOCK').success(function (data) {
+        $scope.imgData = data;
+    }).error(function (data, status) {
+        console.log("код ответа: " + status);
+    });
+
+    $scope.choices = [];
+    $scope.addNewChoice = function () {
+        $scope.choices.push({});
+    };
+
+    $scope.removeChoice = function() {
+        var lastItem = $scope.choices.length-1;
+        $scope.choices.splice(lastItem);
+    };
+
+
 });

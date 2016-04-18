@@ -27,11 +27,11 @@ public class AdminArticleRestController {
     @Autowired
     private ArticleService articleService;
 
-    @RequestMapping(path = "/article", method = RequestMethod.GET,
+    @RequestMapping(path = "/articleImageType/{type}", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ImagesDataDTO articleGET() {
-        return imagesService.findAllWithData(true, ImageType.ARTICLE);
+    public ImagesDataDTO articleGET(@PathVariable ImageType type) {
+        return imagesService.findAllWithData(true, type);
     }
 
     @ResponseStatus(HttpStatus.OK)

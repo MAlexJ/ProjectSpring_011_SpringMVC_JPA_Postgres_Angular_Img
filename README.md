@@ -122,3 +122,17 @@ myApp.service('currentLesson', function () {
 15.
 http://stackoverflow.com/questions/9944137/have-jpa-hibernate-to-replicate-the-on-delete-set-null-functionality
 Have JPA/Hibernate to replicate the “ON DELETE SET NULL” functionality
+
+16.
+http://stackoverflow.com/questions/20295067/angularjs-adding-inputs-that-represent-an-array-model
+AngularJS adding inputs that represent an array model
+
+16-1.
+http://stackoverflow.com/questions/22103258/angularjs-adding-dynamically-form-fields-in-various-forms
+
+16-2.
+http://www.shanidkv.com/blog/angularjs-adding-form-fields-dynamically
+http://www.shanidkv.com/blog/angularjs-dynamic-table-addremove-action
+
+16-3
+http://plnkr.co/edit/a7E9sT?p=info
