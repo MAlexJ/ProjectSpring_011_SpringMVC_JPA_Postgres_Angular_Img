@@ -65,4 +65,9 @@ public class HomeController {
         return "views/adminBlock";
     }
 
+    @RequestMapping(path = "/imageType", method = RequestMethod.GET)
+    public String adminBlockPageImageType_GET() {
+        return "views/imageType";
+    }
+
 }

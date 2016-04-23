@@ -136,3 +136,10 @@ http://www.shanidkv.com/blog/angularjs-dynamic-table-addremove-action
 
 16-3
 http://plnkr.co/edit/a7E9sT?p=info
+
+17. Angular NavBAr acrive
+http://jsfiddle.net/8mcedv3b/
+http://stackoverflow.com/questions/16199418/how-do-i-implement-the-bootstrap-navbar-active-class-with-angular-js
+
+18. Materialize navbar
+http://htmlcheats.com/category/materialize-css/

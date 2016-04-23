@@ -239,7 +239,7 @@ myApp.controller('adminArticleController', function ($scope, $http) {
 
 });
 
-myApp.controller('adminBlockController', function ($scope, $http) {
+myApp.controller('adminBlockController', function ($scope, $http, $compile, currentImages) {
 
     // GET: list -> request get
     $http.get('/category').success(function (data) {
@@ -250,20 +250,28 @@ myApp.controller('adminBlockController', function ($scope, $http) {
 
     // GET: list -> request get
     $http.get('/articleImageType/BLOCK').success(function (data) {
-        $scope.imgData = data;
+        currentImages.setImages(data);
     }).error(function (data, status) {
         console.log("код ответа: " + status);
     });
 
-    $scope.choices = [];
+
     $scope.addNewChoice = function () {
-        $scope.choices.push({});
+        var divElement = angular.element(document.querySelector('#imageTypeDiv'));
+        var appendHtml = $compile('<image-Type></image-Type>')($scope);
+        divElement.append(appendHtml);
+
     };
 
-    $scope.removeChoice = function() {
-        var lastItem = $scope.choices.length-1;
-        $scope.choices.splice(lastItem);
+    $scope.OnSave = function(createBlock, selectArticleData, texta, imgList) {
+
+        console.log("selectArticleData: " + selectArticleData);
+        console.log("texta: " + texta);
+        console.log("imgList: " + imgList);
+
     };
+
+
 
 
 });

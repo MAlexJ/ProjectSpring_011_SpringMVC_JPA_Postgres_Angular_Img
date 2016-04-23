@@ -1,5 +1,5 @@
 myApp.service('currentLesson', function () {
-    
+
     //Angular
     var _idAngular = {};
     var _categoryAngular = {};
@@ -15,7 +15,7 @@ myApp.service('currentLesson', function () {
     //Postgres
     var _idPostgres = {};
     var _categoryPostgres = {};
-    
+
 
     return {
         // Angular
@@ -29,7 +29,7 @@ myApp.service('currentLesson', function () {
         getLessonId_Angular: function () {
             return _idAngular;
         },
-        
+
         // Java
         setLessonCatId_Java: function (category, id) {
             _idJava = id;
@@ -41,7 +41,7 @@ myApp.service('currentLesson', function () {
         getLessonId_Java: function () {
             return _idJava;
         },
-        
+
         // Spring
         setLessonCatId_Spring: function (category, id) {
             _idSpring = id;
@@ -67,5 +67,17 @@ myApp.service('currentLesson', function () {
         }
 
 
-    } 
+    }
+});
+
+myApp.service('currentImages', function () {
+    var _images = {};
+    return {
+        setImages: function (images) {
+            _images = images;
+        },
+        getImages: function () {
+            return _images;
+        }
+    }
 });

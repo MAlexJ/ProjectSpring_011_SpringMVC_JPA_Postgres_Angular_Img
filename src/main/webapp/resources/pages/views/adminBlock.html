@@ -4,6 +4,7 @@
         <div class="col s10">
             <div class="card blue-grey darken-1">
                 <div class="card-content white-text">
+                    <form name="createBlock">
                     <h6>Article</h6>
                     <div class="row">
                         <div class="col s12 m5 l5">
@@ -21,28 +22,9 @@
                     <h6>Image</h6>
 
                     <div class="row">
-                        <div data-ng-repeat="choice in choices">
-                            <div class="col s12 m5 l5">
-                                <label class="black-text">
-                                    <select style="display: block" required=""
-                                            ng-model="imgList"
-                                            ng-options="imgList for imgList in imgData.nameImg">
-                                        <option value="" disabled="">Select Image</option>
-                                    </select>
-                                </label>
-                            </div>
-                            <div class="col s12 m5 l5">
-                                <input type="text" ng-model="imgList"  name="" placeholder="Image"/>
-                            </div>
-                            <div class="col s12 m2 l2">
-                                <div class="input-field">
-                                    <button style="width: 100%; height: 100%" ng-click="removeChoice()" class="btn btn-block">Del</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col s12 m12 l12">
-                            {{ choices }}
-                        </div>
+
+                        <div id="imageTypeDiv"></div>
+
                         <div class="col s12 m12 l12">
                             <div class="input-field">
                                 <button class="btn" ng-click="addNewChoice()">Add Image</button>
@@ -51,20 +33,19 @@
 
                         <div class="input-field col s12">
                             <div class="input-field">
-                                <textarea id="textarea1" class="materialize-textarea"></textarea>
+                                <textarea ng-model="texta" id="textarea1" class="materialize-textarea"></textarea>
                                 <label for="textarea1">Textarea</label>
-
                             </div>
                         </div>
 
                         <div class="col s12 m12 l12">
                             <div class="input-field">
-                                <button class="btn">CREATE</button>
+                                <button ng-click="OnSave(createBlock, selectArticleData, texta, imgList)" class="btn">CREATE</button>
                             </div>
                         </div>
                     </div>
 
-
+                    </form>
                 </div>
             </div>
         </div>

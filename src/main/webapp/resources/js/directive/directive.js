@@ -23,3 +23,20 @@ myApp.directive('imgRender', function () {
         template: '<img src="data:image/png;base64,{{image.img}}">'
     }
 });
+
+myApp.directive('imageType', function() {
+    return {
+        restrict: "E",
+        scope: {},
+        templateUrl:'imageType.html',
+        controller: function($rootScope, $scope, $element, currentImages) {
+            // $scope.contacts = $rootScope.GetContactTypes;
+            $scope.imgData = currentImages.getImages();
+            $scope.Delete = function(e) {
+                //remove element and also destoy the scope that element
+                $element.remove();
+                $scope.$destroy();
+            }
+        }
+    }
+});
