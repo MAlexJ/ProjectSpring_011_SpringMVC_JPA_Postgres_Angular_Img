@@ -143,3 +143,20 @@ http://stackoverflow.com/questions/16199418/how-do-i-implement-the-bootstrap-nav
 
 18. Materialize navbar
 http://htmlcheats.com/category/materialize-css/
+
+19. Openshift base Url routing
+1) http://stackoverflow.com/questions/10379407/does-ie-not-support-the-base-tag/10379987#10379987
+<head>
+ ...
+  <base href="/" />
+ .....
+</head>
+
+2) роутинг в AngularJS -> './' (example: ./angular.html)
+ $routeProvider.when('/angular',
+        {
+            templateUrl: './angular.html',
+            controller: 'angularController'
+        });
+
+
