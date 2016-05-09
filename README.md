@@ -191,3 +191,11 @@ angular.module('link', []).
   }]);
 
 
+21. 16.4.2 Configure CSRF Protection
+Invalid CSRF Token 'null' was found on the request parameter '_csrf' or header 'X-CSRF-TOKEN'. error while using spring security 4.0?
+
+1) http://stackoverflow.com/questions/35610269/invalid-csrf-token-null-was-found-on-the-request-parameter-csrf-or-header?rq=1
+2) http://docs.spring.io/spring-security/site/docs/4.0.3.RELEASE/reference/htmlsingle/#csrf
+Instead by default Spring Security’s CSRF protection will produce an HTTP 403 access denied.
+If you would like to disable CSRF protection -> http.csrf().disable();
+
