@@ -159,4 +159,35 @@ http://htmlcheats.com/category/materialize-css/
             controller: 'angularController'
         });
 
+20. How to highlight a current menu item?
+http://stackoverflow.com/questions/12592472/how-to-highlight-a-current-menu-item
+
+->>>>> it would be used in html:
+<div ng-app="link">
+  <a href="#/one" active-link="active">One</a>
+  <a href="#/two" active-link="active">One</a>
+  <a href="#" active-link="active">home</a>
+</div>
+
+->>>> angularJS
+angular.module('link', []).
+  directive('activeLink', ['$location', function (location) {
+    return {
+      restrict: 'A',
+      link: function(scope, element, attrs, controller) {
+        var clazz = attrs.activeLink;
+        var path = attrs.href;
+        path = path.substring(1); //hack because path does not return including hashbang
+        scope.location = location;
+        scope.$watch('location.path()', function (newPath) {
+          if (path === newPath) {
+            element.addClass(clazz);
+          } else {
+            element.removeClass(clazz);
+          }
+        });
+      }
+    };
+  }]);
+
 
